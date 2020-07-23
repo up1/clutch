@@ -6,6 +6,229 @@ import * as $protobuf from "protobufjs";
 /** Namespace clutch. */
 export namespace clutch {
 
+    /** Namespace amiibo. */
+    namespace amiibo {
+
+        /** Namespace v1. */
+        namespace v1 {
+
+            /** Represents an AmiiboAPI */
+            class AmiiboAPI extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new AmiiboAPI service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Calls GetAmiibo.
+                 * @param request GetAmiiboRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and GetAmiiboResponse
+                 */
+                public getAmiibo(request: clutch.amiibo.v1.IGetAmiiboRequest, callback: clutch.amiibo.v1.AmiiboAPI.GetAmiiboCallback): void;
+
+                /**
+                 * Calls GetAmiibo.
+                 * @param request GetAmiiboRequest message or plain object
+                 * @returns Promise
+                 */
+                public getAmiibo(request: clutch.amiibo.v1.IGetAmiiboRequest): Promise<clutch.amiibo.v1.GetAmiiboResponse>;
+            }
+
+            namespace AmiiboAPI {
+
+                /**
+                 * Callback as used by {@link clutch.amiibo.v1.AmiiboAPI#getAmiibo}.
+                 * @param error Error, if any
+                 * @param [response] GetAmiiboResponse
+                 */
+                type GetAmiiboCallback = (error: (Error|null), response?: clutch.amiibo.v1.GetAmiiboResponse) => void;
+            }
+
+            /** Properties of a GetAmiiboRequest. */
+            interface IGetAmiiboRequest {
+
+                /** GetAmiiboRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetAmiiboRequest. */
+            class GetAmiiboRequest implements IGetAmiiboRequest {
+
+                /**
+                 * Constructs a new GetAmiiboRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: clutch.amiibo.v1.IGetAmiiboRequest);
+
+                /** GetAmiiboRequest name. */
+                public name: string;
+
+                /**
+                 * Verifies a GetAmiiboRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetAmiiboRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetAmiiboRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): clutch.amiibo.v1.GetAmiiboRequest;
+
+                /**
+                 * Creates a plain object from a GetAmiiboRequest message. Also converts values to other types if specified.
+                 * @param message GetAmiiboRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: clutch.amiibo.v1.GetAmiiboRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetAmiiboRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a GetAmiiboResponse. */
+            interface IGetAmiiboResponse {
+
+                /** GetAmiiboResponse amiibo */
+                amiibo?: (clutch.amiibo.v1.IAmiibo[]|null);
+            }
+
+            /** Represents a GetAmiiboResponse. */
+            class GetAmiiboResponse implements IGetAmiiboResponse {
+
+                /**
+                 * Constructs a new GetAmiiboResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: clutch.amiibo.v1.IGetAmiiboResponse);
+
+                /** GetAmiiboResponse amiibo. */
+                public amiibo: clutch.amiibo.v1.IAmiibo[];
+
+                /**
+                 * Verifies a GetAmiiboResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetAmiiboResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetAmiiboResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): clutch.amiibo.v1.GetAmiiboResponse;
+
+                /**
+                 * Creates a plain object from a GetAmiiboResponse message. Also converts values to other types if specified.
+                 * @param message GetAmiiboResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: clutch.amiibo.v1.GetAmiiboResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetAmiiboResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an Amiibo. */
+            interface IAmiibo {
+
+                /** Amiibo character */
+                character?: (string|null);
+
+                /** Amiibo name */
+                name?: (string|null);
+
+                /** Amiibo amiiboSeries */
+                amiiboSeries?: (string|null);
+
+                /** Amiibo imageUrl */
+                imageUrl?: (string|null);
+
+                /** Amiibo type */
+                type?: (clutch.amiibo.v1.Amiibo.Type|null);
+            }
+
+            /** Represents an Amiibo. */
+            class Amiibo implements IAmiibo {
+
+                /**
+                 * Constructs a new Amiibo.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: clutch.amiibo.v1.IAmiibo);
+
+                /** Amiibo character. */
+                public character: string;
+
+                /** Amiibo name. */
+                public name: string;
+
+                /** Amiibo amiiboSeries. */
+                public amiiboSeries: string;
+
+                /** Amiibo imageUrl. */
+                public imageUrl: string;
+
+                /** Amiibo type. */
+                public type: clutch.amiibo.v1.Amiibo.Type;
+
+                /**
+                 * Verifies an Amiibo message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Amiibo message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Amiibo
+                 */
+                public static fromObject(object: { [k: string]: any }): clutch.amiibo.v1.Amiibo;
+
+                /**
+                 * Creates a plain object from an Amiibo message. Also converts values to other types if specified.
+                 * @param message Amiibo
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: clutch.amiibo.v1.Amiibo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Amiibo to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace Amiibo {
+
+                /** Type enum. */
+                enum Type {
+                    UNSPECIFIED = 0,
+                    CARD = 1,
+                    FIGURE = 2,
+                    YARN = 3
+                }
+            }
+        }
+    }
+
     /** Namespace api. */
     namespace api {
 
@@ -11370,6 +11593,223 @@ export namespace validate {
 /** Namespace google. */
 export namespace google {
 
+    /** Namespace api. */
+    namespace api {
+
+        /** Properties of a Http. */
+        interface IHttp {
+
+            /** Http rules */
+            rules?: (google.api.IHttpRule[]|null);
+
+            /** Http fullyDecodeReservedExpansion */
+            fullyDecodeReservedExpansion?: (boolean|null);
+        }
+
+        /** Represents a Http. */
+        class Http implements IHttp {
+
+            /**
+             * Constructs a new Http.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttp);
+
+            /** Http rules. */
+            public rules: google.api.IHttpRule[];
+
+            /** Http fullyDecodeReservedExpansion. */
+            public fullyDecodeReservedExpansion: boolean;
+
+            /**
+             * Verifies a Http message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Http message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Http
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Http;
+
+            /**
+             * Creates a plain object from a Http message. Also converts values to other types if specified.
+             * @param message Http
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Http, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Http to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a HttpRule. */
+        interface IHttpRule {
+
+            /** HttpRule selector */
+            selector?: (string|null);
+
+            /** HttpRule get */
+            get?: (string|null);
+
+            /** HttpRule put */
+            put?: (string|null);
+
+            /** HttpRule post */
+            post?: (string|null);
+
+            /** HttpRule delete */
+            "delete"?: (string|null);
+
+            /** HttpRule patch */
+            patch?: (string|null);
+
+            /** HttpRule custom */
+            custom?: (google.api.ICustomHttpPattern|null);
+
+            /** HttpRule body */
+            body?: (string|null);
+
+            /** HttpRule responseBody */
+            responseBody?: (string|null);
+
+            /** HttpRule additionalBindings */
+            additionalBindings?: (google.api.IHttpRule[]|null);
+        }
+
+        /** Represents a HttpRule. */
+        class HttpRule implements IHttpRule {
+
+            /**
+             * Constructs a new HttpRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttpRule);
+
+            /** HttpRule selector. */
+            public selector: string;
+
+            /** HttpRule get. */
+            public get: string;
+
+            /** HttpRule put. */
+            public put: string;
+
+            /** HttpRule post. */
+            public post: string;
+
+            /** HttpRule delete. */
+            public delete: string;
+
+            /** HttpRule patch. */
+            public patch: string;
+
+            /** HttpRule custom. */
+            public custom?: (google.api.ICustomHttpPattern|null);
+
+            /** HttpRule body. */
+            public body: string;
+
+            /** HttpRule responseBody. */
+            public responseBody: string;
+
+            /** HttpRule additionalBindings. */
+            public additionalBindings: google.api.IHttpRule[];
+
+            /** HttpRule pattern. */
+            public pattern?: ("get"|"put"|"post"|"delete"|"patch"|"custom");
+
+            /**
+             * Verifies a HttpRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns HttpRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.HttpRule;
+
+            /**
+             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
+             * @param message HttpRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.HttpRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this HttpRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a CustomHttpPattern. */
+        interface ICustomHttpPattern {
+
+            /** CustomHttpPattern kind */
+            kind?: (string|null);
+
+            /** CustomHttpPattern path */
+            path?: (string|null);
+        }
+
+        /** Represents a CustomHttpPattern. */
+        class CustomHttpPattern implements ICustomHttpPattern {
+
+            /**
+             * Constructs a new CustomHttpPattern.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ICustomHttpPattern);
+
+            /** CustomHttpPattern kind. */
+            public kind: string;
+
+            /** CustomHttpPattern path. */
+            public path: string;
+
+            /**
+             * Verifies a CustomHttpPattern message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CustomHttpPattern
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.CustomHttpPattern;
+
+            /**
+             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
+             * @param message CustomHttpPattern
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.CustomHttpPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+    }
+
     /** Namespace protobuf. */
     namespace protobuf {
 
@@ -12513,14 +12953,14 @@ export namespace google {
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
+            /** MessageOptions .validate.disabled */
+            ".validate.disabled"?: (boolean|null);
+
             /** MessageOptions .clutch.api.v1.reference */
             ".clutch.api.v1.reference"?: (clutch.api.v1.IReference|null);
 
             /** MessageOptions .clutch.api.v1.id */
             ".clutch.api.v1.id"?: (clutch.api.v1.IIdentifier|null);
-
-            /** MessageOptions .validate.disabled */
-            ".validate.disabled"?: (boolean|null);
 
             /** MessageOptions .clutch.resolver.v1.schema */
             ".clutch.resolver.v1.schema"?: (clutch.resolver.v1.ISchemaMetadata|null);
@@ -14133,223 +14573,6 @@ export namespace google {
 
             /**
              * Converts this BytesValue to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-    }
-
-    /** Namespace api. */
-    namespace api {
-
-        /** Properties of a Http. */
-        interface IHttp {
-
-            /** Http rules */
-            rules?: (google.api.IHttpRule[]|null);
-
-            /** Http fullyDecodeReservedExpansion */
-            fullyDecodeReservedExpansion?: (boolean|null);
-        }
-
-        /** Represents a Http. */
-        class Http implements IHttp {
-
-            /**
-             * Constructs a new Http.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IHttp);
-
-            /** Http rules. */
-            public rules: google.api.IHttpRule[];
-
-            /** Http fullyDecodeReservedExpansion. */
-            public fullyDecodeReservedExpansion: boolean;
-
-            /**
-             * Verifies a Http message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Http message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Http
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Http;
-
-            /**
-             * Creates a plain object from a Http message. Also converts values to other types if specified.
-             * @param message Http
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Http, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Http to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a HttpRule. */
-        interface IHttpRule {
-
-            /** HttpRule selector */
-            selector?: (string|null);
-
-            /** HttpRule get */
-            get?: (string|null);
-
-            /** HttpRule put */
-            put?: (string|null);
-
-            /** HttpRule post */
-            post?: (string|null);
-
-            /** HttpRule delete */
-            "delete"?: (string|null);
-
-            /** HttpRule patch */
-            patch?: (string|null);
-
-            /** HttpRule custom */
-            custom?: (google.api.ICustomHttpPattern|null);
-
-            /** HttpRule body */
-            body?: (string|null);
-
-            /** HttpRule responseBody */
-            responseBody?: (string|null);
-
-            /** HttpRule additionalBindings */
-            additionalBindings?: (google.api.IHttpRule[]|null);
-        }
-
-        /** Represents a HttpRule. */
-        class HttpRule implements IHttpRule {
-
-            /**
-             * Constructs a new HttpRule.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IHttpRule);
-
-            /** HttpRule selector. */
-            public selector: string;
-
-            /** HttpRule get. */
-            public get: string;
-
-            /** HttpRule put. */
-            public put: string;
-
-            /** HttpRule post. */
-            public post: string;
-
-            /** HttpRule delete. */
-            public delete: string;
-
-            /** HttpRule patch. */
-            public patch: string;
-
-            /** HttpRule custom. */
-            public custom?: (google.api.ICustomHttpPattern|null);
-
-            /** HttpRule body. */
-            public body: string;
-
-            /** HttpRule responseBody. */
-            public responseBody: string;
-
-            /** HttpRule additionalBindings. */
-            public additionalBindings: google.api.IHttpRule[];
-
-            /** HttpRule pattern. */
-            public pattern?: ("get"|"put"|"post"|"delete"|"patch"|"custom");
-
-            /**
-             * Verifies a HttpRule message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns HttpRule
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.HttpRule;
-
-            /**
-             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
-             * @param message HttpRule
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.HttpRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this HttpRule to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a CustomHttpPattern. */
-        interface ICustomHttpPattern {
-
-            /** CustomHttpPattern kind */
-            kind?: (string|null);
-
-            /** CustomHttpPattern path */
-            path?: (string|null);
-        }
-
-        /** Represents a CustomHttpPattern. */
-        class CustomHttpPattern implements ICustomHttpPattern {
-
-            /**
-             * Constructs a new CustomHttpPattern.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ICustomHttpPattern);
-
-            /** CustomHttpPattern kind. */
-            public kind: string;
-
-            /** CustomHttpPattern path. */
-            public path: string;
-
-            /**
-             * Verifies a CustomHttpPattern message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CustomHttpPattern
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.CustomHttpPattern;
-
-            /**
-             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
-             * @param message CustomHttpPattern
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.CustomHttpPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CustomHttpPattern to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

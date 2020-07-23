@@ -18,6 +18,512 @@ export const clutch = $root.clutch = (() => {
      */
     const clutch = {};
 
+    clutch.amiibo = (function() {
+
+        /**
+         * Namespace amiibo.
+         * @memberof clutch
+         * @namespace
+         */
+        const amiibo = {};
+
+        amiibo.v1 = (function() {
+
+            /**
+             * Namespace v1.
+             * @memberof clutch.amiibo
+             * @namespace
+             */
+            const v1 = {};
+
+            v1.AmiiboAPI = (function() {
+
+                /**
+                 * Constructs a new AmiiboAPI service.
+                 * @memberof clutch.amiibo.v1
+                 * @classdesc Represents an AmiiboAPI
+                 * @extends $protobuf.rpc.Service
+                 * @constructor
+                 * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                 * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                 * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                 */
+                function AmiiboAPI(rpcImpl, requestDelimited, responseDelimited) {
+                    $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                }
+
+                (AmiiboAPI.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AmiiboAPI;
+
+                /**
+                 * Callback as used by {@link clutch.amiibo.v1.AmiiboAPI#getAmiibo}.
+                 * @memberof clutch.amiibo.v1.AmiiboAPI
+                 * @typedef GetAmiiboCallback
+                 * @type {function}
+                 * @param {Error|null} error Error, if any
+                 * @param {clutch.amiibo.v1.GetAmiiboResponse} [response] GetAmiiboResponse
+                 */
+
+                /**
+                 * Calls GetAmiibo.
+                 * @function getAmiibo
+                 * @memberof clutch.amiibo.v1.AmiiboAPI
+                 * @instance
+                 * @param {clutch.amiibo.v1.IGetAmiiboRequest} request GetAmiiboRequest message or plain object
+                 * @param {clutch.amiibo.v1.AmiiboAPI.GetAmiiboCallback} callback Node-style callback called with the error, if any, and GetAmiiboResponse
+                 * @returns {undefined}
+                 * @variation 1
+                 */
+                Object.defineProperty(AmiiboAPI.prototype.getAmiibo = function getAmiibo(request, callback) {
+                    return this.rpcCall(getAmiibo, $root.clutch.amiibo.v1.GetAmiiboRequest, $root.clutch.amiibo.v1.GetAmiiboResponse, request, callback);
+                }, "name", { value: "GetAmiibo" });
+
+                /**
+                 * Calls GetAmiibo.
+                 * @function getAmiibo
+                 * @memberof clutch.amiibo.v1.AmiiboAPI
+                 * @instance
+                 * @param {clutch.amiibo.v1.IGetAmiiboRequest} request GetAmiiboRequest message or plain object
+                 * @returns {Promise<clutch.amiibo.v1.GetAmiiboResponse>} Promise
+                 * @variation 2
+                 */
+
+                return AmiiboAPI;
+            })();
+
+            v1.GetAmiiboRequest = (function() {
+
+                /**
+                 * Properties of a GetAmiiboRequest.
+                 * @memberof clutch.amiibo.v1
+                 * @interface IGetAmiiboRequest
+                 * @property {string|null} [name] GetAmiiboRequest name
+                 */
+
+                /**
+                 * Constructs a new GetAmiiboRequest.
+                 * @memberof clutch.amiibo.v1
+                 * @classdesc Represents a GetAmiiboRequest.
+                 * @implements IGetAmiiboRequest
+                 * @constructor
+                 * @param {clutch.amiibo.v1.IGetAmiiboRequest=} [properties] Properties to set
+                 */
+                function GetAmiiboRequest(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * GetAmiiboRequest name.
+                 * @member {string} name
+                 * @memberof clutch.amiibo.v1.GetAmiiboRequest
+                 * @instance
+                 */
+                GetAmiiboRequest.prototype.name = "";
+
+                /**
+                 * Verifies a GetAmiiboRequest message.
+                 * @function verify
+                 * @memberof clutch.amiibo.v1.GetAmiiboRequest
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetAmiiboRequest.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a GetAmiiboRequest message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof clutch.amiibo.v1.GetAmiiboRequest
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {clutch.amiibo.v1.GetAmiiboRequest} GetAmiiboRequest
+                 */
+                GetAmiiboRequest.fromObject = function fromObject(object) {
+                    if (object instanceof $root.clutch.amiibo.v1.GetAmiiboRequest)
+                        return object;
+                    let message = new $root.clutch.amiibo.v1.GetAmiiboRequest();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a GetAmiiboRequest message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof clutch.amiibo.v1.GetAmiiboRequest
+                 * @static
+                 * @param {clutch.amiibo.v1.GetAmiiboRequest} message GetAmiiboRequest
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetAmiiboRequest.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults)
+                        object.name = "";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    return object;
+                };
+
+                /**
+                 * Converts this GetAmiiboRequest to JSON.
+                 * @function toJSON
+                 * @memberof clutch.amiibo.v1.GetAmiiboRequest
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetAmiiboRequest.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return GetAmiiboRequest;
+            })();
+
+            v1.GetAmiiboResponse = (function() {
+
+                /**
+                 * Properties of a GetAmiiboResponse.
+                 * @memberof clutch.amiibo.v1
+                 * @interface IGetAmiiboResponse
+                 * @property {Array.<clutch.amiibo.v1.IAmiibo>|null} [amiibo] GetAmiiboResponse amiibo
+                 */
+
+                /**
+                 * Constructs a new GetAmiiboResponse.
+                 * @memberof clutch.amiibo.v1
+                 * @classdesc Represents a GetAmiiboResponse.
+                 * @implements IGetAmiiboResponse
+                 * @constructor
+                 * @param {clutch.amiibo.v1.IGetAmiiboResponse=} [properties] Properties to set
+                 */
+                function GetAmiiboResponse(properties) {
+                    this.amiibo = [];
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * GetAmiiboResponse amiibo.
+                 * @member {Array.<clutch.amiibo.v1.IAmiibo>} amiibo
+                 * @memberof clutch.amiibo.v1.GetAmiiboResponse
+                 * @instance
+                 */
+                GetAmiiboResponse.prototype.amiibo = $util.emptyArray;
+
+                /**
+                 * Verifies a GetAmiiboResponse message.
+                 * @function verify
+                 * @memberof clutch.amiibo.v1.GetAmiiboResponse
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                GetAmiiboResponse.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.amiibo != null && message.hasOwnProperty("amiibo")) {
+                        if (!Array.isArray(message.amiibo))
+                            return "amiibo: array expected";
+                        for (let i = 0; i < message.amiibo.length; ++i) {
+                            let error = $root.clutch.amiibo.v1.Amiibo.verify(message.amiibo[i]);
+                            if (error)
+                                return "amiibo." + error;
+                        }
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a GetAmiiboResponse message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof clutch.amiibo.v1.GetAmiiboResponse
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {clutch.amiibo.v1.GetAmiiboResponse} GetAmiiboResponse
+                 */
+                GetAmiiboResponse.fromObject = function fromObject(object) {
+                    if (object instanceof $root.clutch.amiibo.v1.GetAmiiboResponse)
+                        return object;
+                    let message = new $root.clutch.amiibo.v1.GetAmiiboResponse();
+                    if (object.amiibo) {
+                        if (!Array.isArray(object.amiibo))
+                            throw TypeError(".clutch.amiibo.v1.GetAmiiboResponse.amiibo: array expected");
+                        message.amiibo = [];
+                        for (let i = 0; i < object.amiibo.length; ++i) {
+                            if (typeof object.amiibo[i] !== "object")
+                                throw TypeError(".clutch.amiibo.v1.GetAmiiboResponse.amiibo: object expected");
+                            message.amiibo[i] = $root.clutch.amiibo.v1.Amiibo.fromObject(object.amiibo[i]);
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a GetAmiiboResponse message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof clutch.amiibo.v1.GetAmiiboResponse
+                 * @static
+                 * @param {clutch.amiibo.v1.GetAmiiboResponse} message GetAmiiboResponse
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                GetAmiiboResponse.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.arrays || options.defaults)
+                        object.amiibo = [];
+                    if (message.amiibo && message.amiibo.length) {
+                        object.amiibo = [];
+                        for (let j = 0; j < message.amiibo.length; ++j)
+                            object.amiibo[j] = $root.clutch.amiibo.v1.Amiibo.toObject(message.amiibo[j], options);
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this GetAmiiboResponse to JSON.
+                 * @function toJSON
+                 * @memberof clutch.amiibo.v1.GetAmiiboResponse
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                GetAmiiboResponse.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return GetAmiiboResponse;
+            })();
+
+            v1.Amiibo = (function() {
+
+                /**
+                 * Properties of an Amiibo.
+                 * @memberof clutch.amiibo.v1
+                 * @interface IAmiibo
+                 * @property {string|null} [character] Amiibo character
+                 * @property {string|null} [name] Amiibo name
+                 * @property {string|null} [amiiboSeries] Amiibo amiiboSeries
+                 * @property {string|null} [imageUrl] Amiibo imageUrl
+                 * @property {clutch.amiibo.v1.Amiibo.Type|null} [type] Amiibo type
+                 */
+
+                /**
+                 * Constructs a new Amiibo.
+                 * @memberof clutch.amiibo.v1
+                 * @classdesc Represents an Amiibo.
+                 * @implements IAmiibo
+                 * @constructor
+                 * @param {clutch.amiibo.v1.IAmiibo=} [properties] Properties to set
+                 */
+                function Amiibo(properties) {
+                    if (properties)
+                        for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Amiibo character.
+                 * @member {string} character
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @instance
+                 */
+                Amiibo.prototype.character = "";
+
+                /**
+                 * Amiibo name.
+                 * @member {string} name
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @instance
+                 */
+                Amiibo.prototype.name = "";
+
+                /**
+                 * Amiibo amiiboSeries.
+                 * @member {string} amiiboSeries
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @instance
+                 */
+                Amiibo.prototype.amiiboSeries = "";
+
+                /**
+                 * Amiibo imageUrl.
+                 * @member {string} imageUrl
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @instance
+                 */
+                Amiibo.prototype.imageUrl = "";
+
+                /**
+                 * Amiibo type.
+                 * @member {clutch.amiibo.v1.Amiibo.Type} type
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @instance
+                 */
+                Amiibo.prototype.type = 0;
+
+                /**
+                 * Verifies an Amiibo message.
+                 * @function verify
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Amiibo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.character != null && message.hasOwnProperty("character"))
+                        if (!$util.isString(message.character))
+                            return "character: string expected";
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    if (message.amiiboSeries != null && message.hasOwnProperty("amiiboSeries"))
+                        if (!$util.isString(message.amiiboSeries))
+                            return "amiiboSeries: string expected";
+                    if (message.imageUrl != null && message.hasOwnProperty("imageUrl"))
+                        if (!$util.isString(message.imageUrl))
+                            return "imageUrl: string expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        switch (message.type) {
+                        default:
+                            return "type: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    return null;
+                };
+
+                /**
+                 * Creates an Amiibo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {clutch.amiibo.v1.Amiibo} Amiibo
+                 */
+                Amiibo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.clutch.amiibo.v1.Amiibo)
+                        return object;
+                    let message = new $root.clutch.amiibo.v1.Amiibo();
+                    if (object.character != null)
+                        message.character = String(object.character);
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.amiiboSeries != null)
+                        message.amiiboSeries = String(object.amiiboSeries);
+                    if (object.imageUrl != null)
+                        message.imageUrl = String(object.imageUrl);
+                    switch (object.type) {
+                    case "UNSPECIFIED":
+                    case 0:
+                        message.type = 0;
+                        break;
+                    case "CARD":
+                    case 1:
+                        message.type = 1;
+                        break;
+                    case "FIGURE":
+                    case 2:
+                        message.type = 2;
+                        break;
+                    case "YARN":
+                    case 3:
+                        message.type = 3;
+                        break;
+                    }
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from an Amiibo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @static
+                 * @param {clutch.amiibo.v1.Amiibo} message Amiibo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Amiibo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    let object = {};
+                    if (options.defaults) {
+                        object.character = "";
+                        object.name = "";
+                        object.amiiboSeries = "";
+                        object.imageUrl = "";
+                        object.type = options.enums === String ? "UNSPECIFIED" : 0;
+                    }
+                    if (message.character != null && message.hasOwnProperty("character"))
+                        object.character = message.character;
+                    if (message.name != null && message.hasOwnProperty("name"))
+                        object.name = message.name;
+                    if (message.amiiboSeries != null && message.hasOwnProperty("amiiboSeries"))
+                        object.amiiboSeries = message.amiiboSeries;
+                    if (message.imageUrl != null && message.hasOwnProperty("imageUrl"))
+                        object.imageUrl = message.imageUrl;
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = options.enums === String ? $root.clutch.amiibo.v1.Amiibo.Type[message.type] : message.type;
+                    return object;
+                };
+
+                /**
+                 * Converts this Amiibo to JSON.
+                 * @function toJSON
+                 * @memberof clutch.amiibo.v1.Amiibo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Amiibo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Type enum.
+                 * @name clutch.amiibo.v1.Amiibo.Type
+                 * @enum {string}
+                 * @property {number} UNSPECIFIED=0 UNSPECIFIED value
+                 * @property {number} CARD=1 CARD value
+                 * @property {number} FIGURE=2 FIGURE value
+                 * @property {number} YARN=3 YARN value
+                 */
+                Amiibo.Type = (function() {
+                    const valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "CARD"] = 1;
+                    values[valuesById[2] = "FIGURE"] = 2;
+                    values[valuesById[3] = "YARN"] = 3;
+                    return values;
+                })();
+
+                return Amiibo;
+            })();
+
+            return v1;
+        })();
+
+        return amiibo;
+    })();
+
     clutch.api = (function() {
 
         /**
@@ -29031,6 +29537,600 @@ export const google = $root.google = (() => {
      */
     const google = {};
 
+    google.api = (function() {
+
+        /**
+         * Namespace api.
+         * @memberof google
+         * @namespace
+         */
+        const api = {};
+
+        api.Http = (function() {
+
+            /**
+             * Properties of a Http.
+             * @memberof google.api
+             * @interface IHttp
+             * @property {Array.<google.api.IHttpRule>|null} [rules] Http rules
+             * @property {boolean|null} [fullyDecodeReservedExpansion] Http fullyDecodeReservedExpansion
+             */
+
+            /**
+             * Constructs a new Http.
+             * @memberof google.api
+             * @classdesc Represents a Http.
+             * @implements IHttp
+             * @constructor
+             * @param {google.api.IHttp=} [properties] Properties to set
+             */
+            function Http(properties) {
+                this.rules = [];
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Http rules.
+             * @member {Array.<google.api.IHttpRule>} rules
+             * @memberof google.api.Http
+             * @instance
+             */
+            Http.prototype.rules = $util.emptyArray;
+
+            /**
+             * Http fullyDecodeReservedExpansion.
+             * @member {boolean} fullyDecodeReservedExpansion
+             * @memberof google.api.Http
+             * @instance
+             */
+            Http.prototype.fullyDecodeReservedExpansion = false;
+
+            /**
+             * Verifies a Http message.
+             * @function verify
+             * @memberof google.api.Http
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Http.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.rules != null && message.hasOwnProperty("rules")) {
+                    if (!Array.isArray(message.rules))
+                        return "rules: array expected";
+                    for (let i = 0; i < message.rules.length; ++i) {
+                        let error = $root.google.api.HttpRule.verify(message.rules[i]);
+                        if (error)
+                            return "rules." + error;
+                    }
+                }
+                if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
+                    if (typeof message.fullyDecodeReservedExpansion !== "boolean")
+                        return "fullyDecodeReservedExpansion: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a Http message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.api.Http
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.api.Http} Http
+             */
+            Http.fromObject = function fromObject(object) {
+                if (object instanceof $root.google.api.Http)
+                    return object;
+                let message = new $root.google.api.Http();
+                if (object.rules) {
+                    if (!Array.isArray(object.rules))
+                        throw TypeError(".google.api.Http.rules: array expected");
+                    message.rules = [];
+                    for (let i = 0; i < object.rules.length; ++i) {
+                        if (typeof object.rules[i] !== "object")
+                            throw TypeError(".google.api.Http.rules: object expected");
+                        message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i]);
+                    }
+                }
+                if (object.fullyDecodeReservedExpansion != null)
+                    message.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Http message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.api.Http
+             * @static
+             * @param {google.api.Http} message Http
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Http.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.rules = [];
+                if (options.defaults)
+                    object.fullyDecodeReservedExpansion = false;
+                if (message.rules && message.rules.length) {
+                    object.rules = [];
+                    for (let j = 0; j < message.rules.length; ++j)
+                        object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options);
+                }
+                if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
+                    object.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
+                return object;
+            };
+
+            /**
+             * Converts this Http to JSON.
+             * @function toJSON
+             * @memberof google.api.Http
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Http.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return Http;
+        })();
+
+        api.HttpRule = (function() {
+
+            /**
+             * Properties of a HttpRule.
+             * @memberof google.api
+             * @interface IHttpRule
+             * @property {string|null} [selector] HttpRule selector
+             * @property {string|null} [get] HttpRule get
+             * @property {string|null} [put] HttpRule put
+             * @property {string|null} [post] HttpRule post
+             * @property {string|null} ["delete"] HttpRule delete
+             * @property {string|null} [patch] HttpRule patch
+             * @property {google.api.ICustomHttpPattern|null} [custom] HttpRule custom
+             * @property {string|null} [body] HttpRule body
+             * @property {string|null} [responseBody] HttpRule responseBody
+             * @property {Array.<google.api.IHttpRule>|null} [additionalBindings] HttpRule additionalBindings
+             */
+
+            /**
+             * Constructs a new HttpRule.
+             * @memberof google.api
+             * @classdesc Represents a HttpRule.
+             * @implements IHttpRule
+             * @constructor
+             * @param {google.api.IHttpRule=} [properties] Properties to set
+             */
+            function HttpRule(properties) {
+                this.additionalBindings = [];
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * HttpRule selector.
+             * @member {string} selector
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.selector = "";
+
+            /**
+             * HttpRule get.
+             * @member {string} get
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.get = "";
+
+            /**
+             * HttpRule put.
+             * @member {string} put
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.put = "";
+
+            /**
+             * HttpRule post.
+             * @member {string} post
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.post = "";
+
+            /**
+             * HttpRule delete.
+             * @member {string} delete
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype["delete"] = "";
+
+            /**
+             * HttpRule patch.
+             * @member {string} patch
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.patch = "";
+
+            /**
+             * HttpRule custom.
+             * @member {google.api.ICustomHttpPattern|null|undefined} custom
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.custom = null;
+
+            /**
+             * HttpRule body.
+             * @member {string} body
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.body = "";
+
+            /**
+             * HttpRule responseBody.
+             * @member {string} responseBody
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.responseBody = "";
+
+            /**
+             * HttpRule additionalBindings.
+             * @member {Array.<google.api.IHttpRule>} additionalBindings
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            HttpRule.prototype.additionalBindings = $util.emptyArray;
+
+            // OneOf field names bound to virtual getters and setters
+            let $oneOfFields;
+
+            /**
+             * HttpRule pattern.
+             * @member {"get"|"put"|"post"|"delete"|"patch"|"custom"|undefined} pattern
+             * @memberof google.api.HttpRule
+             * @instance
+             */
+            Object.defineProperty(HttpRule.prototype, "pattern", {
+                get: $util.oneOfGetter($oneOfFields = ["get", "put", "post", "delete", "patch", "custom"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Verifies a HttpRule message.
+             * @function verify
+             * @memberof google.api.HttpRule
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            HttpRule.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                let properties = {};
+                if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (!$util.isString(message.selector))
+                        return "selector: string expected";
+                if (message.get != null && message.hasOwnProperty("get")) {
+                    properties.pattern = 1;
+                    if (!$util.isString(message.get))
+                        return "get: string expected";
+                }
+                if (message.put != null && message.hasOwnProperty("put")) {
+                    if (properties.pattern === 1)
+                        return "pattern: multiple values";
+                    properties.pattern = 1;
+                    if (!$util.isString(message.put))
+                        return "put: string expected";
+                }
+                if (message.post != null && message.hasOwnProperty("post")) {
+                    if (properties.pattern === 1)
+                        return "pattern: multiple values";
+                    properties.pattern = 1;
+                    if (!$util.isString(message.post))
+                        return "post: string expected";
+                }
+                if (message["delete"] != null && message.hasOwnProperty("delete")) {
+                    if (properties.pattern === 1)
+                        return "pattern: multiple values";
+                    properties.pattern = 1;
+                    if (!$util.isString(message["delete"]))
+                        return "delete: string expected";
+                }
+                if (message.patch != null && message.hasOwnProperty("patch")) {
+                    if (properties.pattern === 1)
+                        return "pattern: multiple values";
+                    properties.pattern = 1;
+                    if (!$util.isString(message.patch))
+                        return "patch: string expected";
+                }
+                if (message.custom != null && message.hasOwnProperty("custom")) {
+                    if (properties.pattern === 1)
+                        return "pattern: multiple values";
+                    properties.pattern = 1;
+                    {
+                        let error = $root.google.api.CustomHttpPattern.verify(message.custom);
+                        if (error)
+                            return "custom." + error;
+                    }
+                }
+                if (message.body != null && message.hasOwnProperty("body"))
+                    if (!$util.isString(message.body))
+                        return "body: string expected";
+                if (message.responseBody != null && message.hasOwnProperty("responseBody"))
+                    if (!$util.isString(message.responseBody))
+                        return "responseBody: string expected";
+                if (message.additionalBindings != null && message.hasOwnProperty("additionalBindings")) {
+                    if (!Array.isArray(message.additionalBindings))
+                        return "additionalBindings: array expected";
+                    for (let i = 0; i < message.additionalBindings.length; ++i) {
+                        let error = $root.google.api.HttpRule.verify(message.additionalBindings[i]);
+                        if (error)
+                            return "additionalBindings." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.api.HttpRule
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.api.HttpRule} HttpRule
+             */
+            HttpRule.fromObject = function fromObject(object) {
+                if (object instanceof $root.google.api.HttpRule)
+                    return object;
+                let message = new $root.google.api.HttpRule();
+                if (object.selector != null)
+                    message.selector = String(object.selector);
+                if (object.get != null)
+                    message.get = String(object.get);
+                if (object.put != null)
+                    message.put = String(object.put);
+                if (object.post != null)
+                    message.post = String(object.post);
+                if (object["delete"] != null)
+                    message["delete"] = String(object["delete"]);
+                if (object.patch != null)
+                    message.patch = String(object.patch);
+                if (object.custom != null) {
+                    if (typeof object.custom !== "object")
+                        throw TypeError(".google.api.HttpRule.custom: object expected");
+                    message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom);
+                }
+                if (object.body != null)
+                    message.body = String(object.body);
+                if (object.responseBody != null)
+                    message.responseBody = String(object.responseBody);
+                if (object.additionalBindings) {
+                    if (!Array.isArray(object.additionalBindings))
+                        throw TypeError(".google.api.HttpRule.additionalBindings: array expected");
+                    message.additionalBindings = [];
+                    for (let i = 0; i < object.additionalBindings.length; ++i) {
+                        if (typeof object.additionalBindings[i] !== "object")
+                            throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
+                        message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.api.HttpRule
+             * @static
+             * @param {google.api.HttpRule} message HttpRule
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            HttpRule.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.additionalBindings = [];
+                if (options.defaults) {
+                    object.selector = "";
+                    object.body = "";
+                    object.responseBody = "";
+                }
+                if (message.selector != null && message.hasOwnProperty("selector"))
+                    object.selector = message.selector;
+                if (message.get != null && message.hasOwnProperty("get")) {
+                    object.get = message.get;
+                    if (options.oneofs)
+                        object.pattern = "get";
+                }
+                if (message.put != null && message.hasOwnProperty("put")) {
+                    object.put = message.put;
+                    if (options.oneofs)
+                        object.pattern = "put";
+                }
+                if (message.post != null && message.hasOwnProperty("post")) {
+                    object.post = message.post;
+                    if (options.oneofs)
+                        object.pattern = "post";
+                }
+                if (message["delete"] != null && message.hasOwnProperty("delete")) {
+                    object["delete"] = message["delete"];
+                    if (options.oneofs)
+                        object.pattern = "delete";
+                }
+                if (message.patch != null && message.hasOwnProperty("patch")) {
+                    object.patch = message.patch;
+                    if (options.oneofs)
+                        object.pattern = "patch";
+                }
+                if (message.body != null && message.hasOwnProperty("body"))
+                    object.body = message.body;
+                if (message.custom != null && message.hasOwnProperty("custom")) {
+                    object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options);
+                    if (options.oneofs)
+                        object.pattern = "custom";
+                }
+                if (message.additionalBindings && message.additionalBindings.length) {
+                    object.additionalBindings = [];
+                    for (let j = 0; j < message.additionalBindings.length; ++j)
+                        object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options);
+                }
+                if (message.responseBody != null && message.hasOwnProperty("responseBody"))
+                    object.responseBody = message.responseBody;
+                return object;
+            };
+
+            /**
+             * Converts this HttpRule to JSON.
+             * @function toJSON
+             * @memberof google.api.HttpRule
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            HttpRule.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return HttpRule;
+        })();
+
+        api.CustomHttpPattern = (function() {
+
+            /**
+             * Properties of a CustomHttpPattern.
+             * @memberof google.api
+             * @interface ICustomHttpPattern
+             * @property {string|null} [kind] CustomHttpPattern kind
+             * @property {string|null} [path] CustomHttpPattern path
+             */
+
+            /**
+             * Constructs a new CustomHttpPattern.
+             * @memberof google.api
+             * @classdesc Represents a CustomHttpPattern.
+             * @implements ICustomHttpPattern
+             * @constructor
+             * @param {google.api.ICustomHttpPattern=} [properties] Properties to set
+             */
+            function CustomHttpPattern(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * CustomHttpPattern kind.
+             * @member {string} kind
+             * @memberof google.api.CustomHttpPattern
+             * @instance
+             */
+            CustomHttpPattern.prototype.kind = "";
+
+            /**
+             * CustomHttpPattern path.
+             * @member {string} path
+             * @memberof google.api.CustomHttpPattern
+             * @instance
+             */
+            CustomHttpPattern.prototype.path = "";
+
+            /**
+             * Verifies a CustomHttpPattern message.
+             * @function verify
+             * @memberof google.api.CustomHttpPattern
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CustomHttpPattern.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.kind != null && message.hasOwnProperty("kind"))
+                    if (!$util.isString(message.kind))
+                        return "kind: string expected";
+                if (message.path != null && message.hasOwnProperty("path"))
+                    if (!$util.isString(message.path))
+                        return "path: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.api.CustomHttpPattern
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.api.CustomHttpPattern} CustomHttpPattern
+             */
+            CustomHttpPattern.fromObject = function fromObject(object) {
+                if (object instanceof $root.google.api.CustomHttpPattern)
+                    return object;
+                let message = new $root.google.api.CustomHttpPattern();
+                if (object.kind != null)
+                    message.kind = String(object.kind);
+                if (object.path != null)
+                    message.path = String(object.path);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.api.CustomHttpPattern
+             * @static
+             * @param {google.api.CustomHttpPattern} message CustomHttpPattern
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CustomHttpPattern.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.kind = "";
+                    object.path = "";
+                }
+                if (message.kind != null && message.hasOwnProperty("kind"))
+                    object.kind = message.kind;
+                if (message.path != null && message.hasOwnProperty("path"))
+                    object.path = message.path;
+                return object;
+            };
+
+            /**
+             * Converts this CustomHttpPattern to JSON.
+             * @function toJSON
+             * @memberof google.api.CustomHttpPattern
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CustomHttpPattern.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return CustomHttpPattern;
+        })();
+
+        return api;
+    })();
+
     google.protobuf = (function() {
 
         /**
@@ -32238,9 +33338,9 @@ export const google = $root.google = (() => {
              * @property {boolean|null} [deprecated] MessageOptions deprecated
              * @property {boolean|null} [mapEntry] MessageOptions mapEntry
              * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+             * @property {boolean|null} [".validate.disabled"] MessageOptions .validate.disabled
              * @property {clutch.api.v1.IReference|null} [".clutch.api.v1.reference"] MessageOptions .clutch.api.v1.reference
              * @property {clutch.api.v1.IIdentifier|null} [".clutch.api.v1.id"] MessageOptions .clutch.api.v1.id
-             * @property {boolean|null} [".validate.disabled"] MessageOptions .validate.disabled
              * @property {clutch.resolver.v1.ISchemaMetadata|null} [".clutch.resolver.v1.schema"] MessageOptions .clutch.resolver.v1.schema
              */
 
@@ -32301,6 +33401,14 @@ export const google = $root.google = (() => {
             MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
 
             /**
+             * MessageOptions .validate.disabled.
+             * @member {boolean} .validate.disabled
+             * @memberof google.protobuf.MessageOptions
+             * @instance
+             */
+            MessageOptions.prototype[".validate.disabled"] = false;
+
+            /**
              * MessageOptions .clutch.api.v1.reference.
              * @member {clutch.api.v1.IReference|null|undefined} .clutch.api.v1.reference
              * @memberof google.protobuf.MessageOptions
@@ -32315,14 +33423,6 @@ export const google = $root.google = (() => {
              * @instance
              */
             MessageOptions.prototype[".clutch.api.v1.id"] = null;
-
-            /**
-             * MessageOptions .validate.disabled.
-             * @member {boolean} .validate.disabled
-             * @memberof google.protobuf.MessageOptions
-             * @instance
-             */
-            MessageOptions.prototype[".validate.disabled"] = false;
 
             /**
              * MessageOptions .clutch.resolver.v1.schema.
@@ -32364,6 +33464,9 @@ export const google = $root.google = (() => {
                             return "uninterpretedOption." + error;
                     }
                 }
+                if (message[".validate.disabled"] != null && message.hasOwnProperty(".validate.disabled"))
+                    if (typeof message[".validate.disabled"] !== "boolean")
+                        return ".validate.disabled: boolean expected";
                 if (message[".clutch.api.v1.reference"] != null && message.hasOwnProperty(".clutch.api.v1.reference")) {
                     let error = $root.clutch.api.v1.Reference.verify(message[".clutch.api.v1.reference"]);
                     if (error)
@@ -32374,9 +33477,6 @@ export const google = $root.google = (() => {
                     if (error)
                         return ".clutch.api.v1.id." + error;
                 }
-                if (message[".validate.disabled"] != null && message.hasOwnProperty(".validate.disabled"))
-                    if (typeof message[".validate.disabled"] !== "boolean")
-                        return ".validate.disabled: boolean expected";
                 if (message[".clutch.resolver.v1.schema"] != null && message.hasOwnProperty(".clutch.resolver.v1.schema")) {
                     let error = $root.clutch.resolver.v1.SchemaMetadata.verify(message[".clutch.resolver.v1.schema"]);
                     if (error)
@@ -32415,6 +33515,8 @@ export const google = $root.google = (() => {
                         message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                     }
                 }
+                if (object[".validate.disabled"] != null)
+                    message[".validate.disabled"] = Boolean(object[".validate.disabled"]);
                 if (object[".clutch.api.v1.reference"] != null) {
                     if (typeof object[".clutch.api.v1.reference"] !== "object")
                         throw TypeError(".google.protobuf.MessageOptions..clutch.api.v1.reference: object expected");
@@ -32425,8 +33527,6 @@ export const google = $root.google = (() => {
                         throw TypeError(".google.protobuf.MessageOptions..clutch.api.v1.id: object expected");
                     message[".clutch.api.v1.id"] = $root.clutch.api.v1.Identifier.fromObject(object[".clutch.api.v1.id"]);
                 }
-                if (object[".validate.disabled"] != null)
-                    message[".validate.disabled"] = Boolean(object[".validate.disabled"]);
                 if (object[".clutch.resolver.v1.schema"] != null) {
                     if (typeof object[".clutch.resolver.v1.schema"] !== "object")
                         throw TypeError(".google.protobuf.MessageOptions..clutch.resolver.v1.schema: object expected");
@@ -36445,600 +37545,6 @@ export const google = $root.google = (() => {
         })();
 
         return protobuf;
-    })();
-
-    google.api = (function() {
-
-        /**
-         * Namespace api.
-         * @memberof google
-         * @namespace
-         */
-        const api = {};
-
-        api.Http = (function() {
-
-            /**
-             * Properties of a Http.
-             * @memberof google.api
-             * @interface IHttp
-             * @property {Array.<google.api.IHttpRule>|null} [rules] Http rules
-             * @property {boolean|null} [fullyDecodeReservedExpansion] Http fullyDecodeReservedExpansion
-             */
-
-            /**
-             * Constructs a new Http.
-             * @memberof google.api
-             * @classdesc Represents a Http.
-             * @implements IHttp
-             * @constructor
-             * @param {google.api.IHttp=} [properties] Properties to set
-             */
-            function Http(properties) {
-                this.rules = [];
-                if (properties)
-                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-
-            /**
-             * Http rules.
-             * @member {Array.<google.api.IHttpRule>} rules
-             * @memberof google.api.Http
-             * @instance
-             */
-            Http.prototype.rules = $util.emptyArray;
-
-            /**
-             * Http fullyDecodeReservedExpansion.
-             * @member {boolean} fullyDecodeReservedExpansion
-             * @memberof google.api.Http
-             * @instance
-             */
-            Http.prototype.fullyDecodeReservedExpansion = false;
-
-            /**
-             * Verifies a Http message.
-             * @function verify
-             * @memberof google.api.Http
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            Http.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.rules != null && message.hasOwnProperty("rules")) {
-                    if (!Array.isArray(message.rules))
-                        return "rules: array expected";
-                    for (let i = 0; i < message.rules.length; ++i) {
-                        let error = $root.google.api.HttpRule.verify(message.rules[i]);
-                        if (error)
-                            return "rules." + error;
-                    }
-                }
-                if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
-                    if (typeof message.fullyDecodeReservedExpansion !== "boolean")
-                        return "fullyDecodeReservedExpansion: boolean expected";
-                return null;
-            };
-
-            /**
-             * Creates a Http message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof google.api.Http
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {google.api.Http} Http
-             */
-            Http.fromObject = function fromObject(object) {
-                if (object instanceof $root.google.api.Http)
-                    return object;
-                let message = new $root.google.api.Http();
-                if (object.rules) {
-                    if (!Array.isArray(object.rules))
-                        throw TypeError(".google.api.Http.rules: array expected");
-                    message.rules = [];
-                    for (let i = 0; i < object.rules.length; ++i) {
-                        if (typeof object.rules[i] !== "object")
-                            throw TypeError(".google.api.Http.rules: object expected");
-                        message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i]);
-                    }
-                }
-                if (object.fullyDecodeReservedExpansion != null)
-                    message.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
-                return message;
-            };
-
-            /**
-             * Creates a plain object from a Http message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof google.api.Http
-             * @static
-             * @param {google.api.Http} message Http
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            Http.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                let object = {};
-                if (options.arrays || options.defaults)
-                    object.rules = [];
-                if (options.defaults)
-                    object.fullyDecodeReservedExpansion = false;
-                if (message.rules && message.rules.length) {
-                    object.rules = [];
-                    for (let j = 0; j < message.rules.length; ++j)
-                        object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options);
-                }
-                if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
-                    object.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
-                return object;
-            };
-
-            /**
-             * Converts this Http to JSON.
-             * @function toJSON
-             * @memberof google.api.Http
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            Http.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            return Http;
-        })();
-
-        api.HttpRule = (function() {
-
-            /**
-             * Properties of a HttpRule.
-             * @memberof google.api
-             * @interface IHttpRule
-             * @property {string|null} [selector] HttpRule selector
-             * @property {string|null} [get] HttpRule get
-             * @property {string|null} [put] HttpRule put
-             * @property {string|null} [post] HttpRule post
-             * @property {string|null} ["delete"] HttpRule delete
-             * @property {string|null} [patch] HttpRule patch
-             * @property {google.api.ICustomHttpPattern|null} [custom] HttpRule custom
-             * @property {string|null} [body] HttpRule body
-             * @property {string|null} [responseBody] HttpRule responseBody
-             * @property {Array.<google.api.IHttpRule>|null} [additionalBindings] HttpRule additionalBindings
-             */
-
-            /**
-             * Constructs a new HttpRule.
-             * @memberof google.api
-             * @classdesc Represents a HttpRule.
-             * @implements IHttpRule
-             * @constructor
-             * @param {google.api.IHttpRule=} [properties] Properties to set
-             */
-            function HttpRule(properties) {
-                this.additionalBindings = [];
-                if (properties)
-                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-
-            /**
-             * HttpRule selector.
-             * @member {string} selector
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.selector = "";
-
-            /**
-             * HttpRule get.
-             * @member {string} get
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.get = "";
-
-            /**
-             * HttpRule put.
-             * @member {string} put
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.put = "";
-
-            /**
-             * HttpRule post.
-             * @member {string} post
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.post = "";
-
-            /**
-             * HttpRule delete.
-             * @member {string} delete
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype["delete"] = "";
-
-            /**
-             * HttpRule patch.
-             * @member {string} patch
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.patch = "";
-
-            /**
-             * HttpRule custom.
-             * @member {google.api.ICustomHttpPattern|null|undefined} custom
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.custom = null;
-
-            /**
-             * HttpRule body.
-             * @member {string} body
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.body = "";
-
-            /**
-             * HttpRule responseBody.
-             * @member {string} responseBody
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.responseBody = "";
-
-            /**
-             * HttpRule additionalBindings.
-             * @member {Array.<google.api.IHttpRule>} additionalBindings
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            HttpRule.prototype.additionalBindings = $util.emptyArray;
-
-            // OneOf field names bound to virtual getters and setters
-            let $oneOfFields;
-
-            /**
-             * HttpRule pattern.
-             * @member {"get"|"put"|"post"|"delete"|"patch"|"custom"|undefined} pattern
-             * @memberof google.api.HttpRule
-             * @instance
-             */
-            Object.defineProperty(HttpRule.prototype, "pattern", {
-                get: $util.oneOfGetter($oneOfFields = ["get", "put", "post", "delete", "patch", "custom"]),
-                set: $util.oneOfSetter($oneOfFields)
-            });
-
-            /**
-             * Verifies a HttpRule message.
-             * @function verify
-             * @memberof google.api.HttpRule
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            HttpRule.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                let properties = {};
-                if (message.selector != null && message.hasOwnProperty("selector"))
-                    if (!$util.isString(message.selector))
-                        return "selector: string expected";
-                if (message.get != null && message.hasOwnProperty("get")) {
-                    properties.pattern = 1;
-                    if (!$util.isString(message.get))
-                        return "get: string expected";
-                }
-                if (message.put != null && message.hasOwnProperty("put")) {
-                    if (properties.pattern === 1)
-                        return "pattern: multiple values";
-                    properties.pattern = 1;
-                    if (!$util.isString(message.put))
-                        return "put: string expected";
-                }
-                if (message.post != null && message.hasOwnProperty("post")) {
-                    if (properties.pattern === 1)
-                        return "pattern: multiple values";
-                    properties.pattern = 1;
-                    if (!$util.isString(message.post))
-                        return "post: string expected";
-                }
-                if (message["delete"] != null && message.hasOwnProperty("delete")) {
-                    if (properties.pattern === 1)
-                        return "pattern: multiple values";
-                    properties.pattern = 1;
-                    if (!$util.isString(message["delete"]))
-                        return "delete: string expected";
-                }
-                if (message.patch != null && message.hasOwnProperty("patch")) {
-                    if (properties.pattern === 1)
-                        return "pattern: multiple values";
-                    properties.pattern = 1;
-                    if (!$util.isString(message.patch))
-                        return "patch: string expected";
-                }
-                if (message.custom != null && message.hasOwnProperty("custom")) {
-                    if (properties.pattern === 1)
-                        return "pattern: multiple values";
-                    properties.pattern = 1;
-                    {
-                        let error = $root.google.api.CustomHttpPattern.verify(message.custom);
-                        if (error)
-                            return "custom." + error;
-                    }
-                }
-                if (message.body != null && message.hasOwnProperty("body"))
-                    if (!$util.isString(message.body))
-                        return "body: string expected";
-                if (message.responseBody != null && message.hasOwnProperty("responseBody"))
-                    if (!$util.isString(message.responseBody))
-                        return "responseBody: string expected";
-                if (message.additionalBindings != null && message.hasOwnProperty("additionalBindings")) {
-                    if (!Array.isArray(message.additionalBindings))
-                        return "additionalBindings: array expected";
-                    for (let i = 0; i < message.additionalBindings.length; ++i) {
-                        let error = $root.google.api.HttpRule.verify(message.additionalBindings[i]);
-                        if (error)
-                            return "additionalBindings." + error;
-                    }
-                }
-                return null;
-            };
-
-            /**
-             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof google.api.HttpRule
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {google.api.HttpRule} HttpRule
-             */
-            HttpRule.fromObject = function fromObject(object) {
-                if (object instanceof $root.google.api.HttpRule)
-                    return object;
-                let message = new $root.google.api.HttpRule();
-                if (object.selector != null)
-                    message.selector = String(object.selector);
-                if (object.get != null)
-                    message.get = String(object.get);
-                if (object.put != null)
-                    message.put = String(object.put);
-                if (object.post != null)
-                    message.post = String(object.post);
-                if (object["delete"] != null)
-                    message["delete"] = String(object["delete"]);
-                if (object.patch != null)
-                    message.patch = String(object.patch);
-                if (object.custom != null) {
-                    if (typeof object.custom !== "object")
-                        throw TypeError(".google.api.HttpRule.custom: object expected");
-                    message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom);
-                }
-                if (object.body != null)
-                    message.body = String(object.body);
-                if (object.responseBody != null)
-                    message.responseBody = String(object.responseBody);
-                if (object.additionalBindings) {
-                    if (!Array.isArray(object.additionalBindings))
-                        throw TypeError(".google.api.HttpRule.additionalBindings: array expected");
-                    message.additionalBindings = [];
-                    for (let i = 0; i < object.additionalBindings.length; ++i) {
-                        if (typeof object.additionalBindings[i] !== "object")
-                            throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
-                        message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i]);
-                    }
-                }
-                return message;
-            };
-
-            /**
-             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof google.api.HttpRule
-             * @static
-             * @param {google.api.HttpRule} message HttpRule
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            HttpRule.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                let object = {};
-                if (options.arrays || options.defaults)
-                    object.additionalBindings = [];
-                if (options.defaults) {
-                    object.selector = "";
-                    object.body = "";
-                    object.responseBody = "";
-                }
-                if (message.selector != null && message.hasOwnProperty("selector"))
-                    object.selector = message.selector;
-                if (message.get != null && message.hasOwnProperty("get")) {
-                    object.get = message.get;
-                    if (options.oneofs)
-                        object.pattern = "get";
-                }
-                if (message.put != null && message.hasOwnProperty("put")) {
-                    object.put = message.put;
-                    if (options.oneofs)
-                        object.pattern = "put";
-                }
-                if (message.post != null && message.hasOwnProperty("post")) {
-                    object.post = message.post;
-                    if (options.oneofs)
-                        object.pattern = "post";
-                }
-                if (message["delete"] != null && message.hasOwnProperty("delete")) {
-                    object["delete"] = message["delete"];
-                    if (options.oneofs)
-                        object.pattern = "delete";
-                }
-                if (message.patch != null && message.hasOwnProperty("patch")) {
-                    object.patch = message.patch;
-                    if (options.oneofs)
-                        object.pattern = "patch";
-                }
-                if (message.body != null && message.hasOwnProperty("body"))
-                    object.body = message.body;
-                if (message.custom != null && message.hasOwnProperty("custom")) {
-                    object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options);
-                    if (options.oneofs)
-                        object.pattern = "custom";
-                }
-                if (message.additionalBindings && message.additionalBindings.length) {
-                    object.additionalBindings = [];
-                    for (let j = 0; j < message.additionalBindings.length; ++j)
-                        object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options);
-                }
-                if (message.responseBody != null && message.hasOwnProperty("responseBody"))
-                    object.responseBody = message.responseBody;
-                return object;
-            };
-
-            /**
-             * Converts this HttpRule to JSON.
-             * @function toJSON
-             * @memberof google.api.HttpRule
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            HttpRule.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            return HttpRule;
-        })();
-
-        api.CustomHttpPattern = (function() {
-
-            /**
-             * Properties of a CustomHttpPattern.
-             * @memberof google.api
-             * @interface ICustomHttpPattern
-             * @property {string|null} [kind] CustomHttpPattern kind
-             * @property {string|null} [path] CustomHttpPattern path
-             */
-
-            /**
-             * Constructs a new CustomHttpPattern.
-             * @memberof google.api
-             * @classdesc Represents a CustomHttpPattern.
-             * @implements ICustomHttpPattern
-             * @constructor
-             * @param {google.api.ICustomHttpPattern=} [properties] Properties to set
-             */
-            function CustomHttpPattern(properties) {
-                if (properties)
-                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-
-            /**
-             * CustomHttpPattern kind.
-             * @member {string} kind
-             * @memberof google.api.CustomHttpPattern
-             * @instance
-             */
-            CustomHttpPattern.prototype.kind = "";
-
-            /**
-             * CustomHttpPattern path.
-             * @member {string} path
-             * @memberof google.api.CustomHttpPattern
-             * @instance
-             */
-            CustomHttpPattern.prototype.path = "";
-
-            /**
-             * Verifies a CustomHttpPattern message.
-             * @function verify
-             * @memberof google.api.CustomHttpPattern
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            CustomHttpPattern.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                if (message.kind != null && message.hasOwnProperty("kind"))
-                    if (!$util.isString(message.kind))
-                        return "kind: string expected";
-                if (message.path != null && message.hasOwnProperty("path"))
-                    if (!$util.isString(message.path))
-                        return "path: string expected";
-                return null;
-            };
-
-            /**
-             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof google.api.CustomHttpPattern
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {google.api.CustomHttpPattern} CustomHttpPattern
-             */
-            CustomHttpPattern.fromObject = function fromObject(object) {
-                if (object instanceof $root.google.api.CustomHttpPattern)
-                    return object;
-                let message = new $root.google.api.CustomHttpPattern();
-                if (object.kind != null)
-                    message.kind = String(object.kind);
-                if (object.path != null)
-                    message.path = String(object.path);
-                return message;
-            };
-
-            /**
-             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof google.api.CustomHttpPattern
-             * @static
-             * @param {google.api.CustomHttpPattern} message CustomHttpPattern
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            CustomHttpPattern.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                let object = {};
-                if (options.defaults) {
-                    object.kind = "";
-                    object.path = "";
-                }
-                if (message.kind != null && message.hasOwnProperty("kind"))
-                    object.kind = message.kind;
-                if (message.path != null && message.hasOwnProperty("path"))
-                    object.path = message.path;
-                return object;
-            };
-
-            /**
-             * Converts this CustomHttpPattern to JSON.
-             * @function toJSON
-             * @memberof google.api.CustomHttpPattern
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            CustomHttpPattern.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            return CustomHttpPattern;
-        })();
-
-        return api;
     })();
 
     google.rpc = (function() {
