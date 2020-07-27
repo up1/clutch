@@ -23,7 +23,18 @@ modules:
   - name: clutch.module.envoytriage
   - name: clutch.module.k8s
   - name: clutch.module.kinesis
+  - name: clutch.module.chaos.experimentation.api
 services:
+  - name: clutch.service.db.postgres
+    typed_config:
+      "@type": types.google.com/clutch.config.service.db.postgres.v1.Config
+      connection:
+        host: localhost
+        port: 5432
+        user: clutch
+        ssl_mode: DISABLE
+        dbname: clutch
+        password: clutch
   - name: clutch.service.aws
     typed_config:
       "@type": types.google.com/clutch.config.service.aws.v1.Config
@@ -35,6 +46,7 @@ services:
       "@type": types.google.com/clutch.config.service.envoyadmin.v1.Config
       secure: false
       default_remote_port: 9876
+  - name: clutch.service.chaos.experimentation.store
   - name: clutch.service.k8s
     typed_config:
       "@type": types.google.com/clutch.config.service.k8s.v1.Config
