@@ -8,6 +8,7 @@ import (
 
 	gcpDiscovery "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
 	gcpCache "github.com/envoyproxy/go-control-plane/pkg/cache"
+	"github.com/golang/protobuf/ptypes"
 	pstruct "github.com/golang/protobuf/ptypes/struct"
 	"github.com/mitchellh/hashstructure"
 	"go.uber.org/zap"
@@ -152,9 +153,12 @@ func createRuntimeKeys(experiment *experimentation.Experiment, logger *zap.Sugar
 	var faultKey string
 	var faultValue int32
 
-	switch experiment.GetTestSpecification().GetConfig().(type) {
-	case *experimentation.TestSpecification_Abort:
-		abort := experiment.GetTestSpecification().GetAbort()
+	testSpecification := &experimentation.ServerTestSpecification{}
+	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+
+	switch testSpecification.GetConfig().(type) {
+	case *experimentation.ServerTestSpecification_Abort:
+		abort := testSpecification.GetAbort()
 		percentageValue = abort.Percent
 		faultValue = abort.HttpStatus
 
@@ -166,8 +170,8 @@ func createRuntimeKeys(experiment *experimentation.Experiment, logger *zap.Sugar
 			percentageKey = fmt.Sprintf(HTTPPercentageWithDownstream, target.DownstreamCluster)
 			faultKey = fmt.Sprintf(HTTPStatusWithDownstream, target.DownstreamCluster)
 		}
-	case *experimentation.TestSpecification_Latency:
-		latency := experiment.GetTestSpecification().GetLatency()
+	case *experimentation.ServerTestSpecification_Latency:
+		latency := testSpecification.GetLatency()
 		percentageValue = latency.Percent
 		faultValue = latency.DurationMs
 
@@ -188,10 +192,19 @@ func createRuntimeKeys(experiment *experimentation.Experiment, logger *zap.Sugar
 }
 
 func isFaultTest(experiment *experimentation.Experiment) bool {
-	switch experiment.GetTestSpecification().GetConfig().(type) {
-	case *experimentation.TestSpecification_Abort:
+	testSpecification := &experimentation.ServerTestSpecification{}
+	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+
+	if !ptypes.Is(experiment.GetTestConfig(), testSpecification) {
+		return false
+	}
+
+	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+
+	switch testSpecification.GetConfig().(type) {
+	case *experimentation.ServerTestSpecification_Abort:
 		return true
-	case *experimentation.TestSpecification_Latency:
+	case *experimentation.ServerTestSpecification_Latency:
 		return true
 	default:
 		return false
@@ -199,12 +212,15 @@ func isFaultTest(experiment *experimentation.Experiment) bool {
 }
 
 func getClusterPair(experiment *experimentation.Experiment) *experimentation.ClusterPairTarget {
-	switch experiment.GetTestSpecification().GetConfig().(type) {
-	case *experimentation.TestSpecification_Abort:
-		abort := experiment.GetTestSpecification().GetAbort()
+	testSpecification := &experimentation.ServerTestSpecification{}
+	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+
+	switch testSpecification.GetConfig().(type) {
+	case *experimentation.ServerTestSpecification_Abort:
+		abort := testSpecification.GetAbort()
 		return abort.GetClusterPair()
-	case *experimentation.TestSpecification_Latency:
-		latency := experiment.GetTestSpecification().GetLatency()
+	case *experimentation.ServerTestSpecification_Latency:
+		latency := testSpecification.GetLatency()
 		return latency.GetClusterPair()
 	}
 	panic("unknown fault type")

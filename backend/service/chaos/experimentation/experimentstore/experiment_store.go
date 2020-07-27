@@ -9,7 +9,9 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/golang/protobuf/jsonpb"
+	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/any"
+	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 
@@ -62,10 +64,15 @@ func (fs *experimentStore) CreateExperiments(ctx context.Context, experiments []
 	builder := psql.Insert(experimentsTableName).Columns(experimentColumns...)
 
 	for _, experiment := range experiments {
+		anyTestConfig, err := ptypes.MarshalAny(experiment.GetTestConfig())
+		if err != nil {
+			return err
+		}
+
 		marshaler := jsonpb.Marshaler{}
 		buf := &bytes.Buffer{}
-		err := marshaler.Marshal(buf, experiment.GetTestSpecification())
-		if err != nil {
+		err2 := marshaler.Marshal(buf, anyTestConfig)
+		if err2 != nil {
 			return err
 		}
 		s := buf.String()
@@ -129,11 +136,11 @@ func (fs *experimentStore) GetExperiments(ctx context.Context) ([]*experimentati
 			return nil, err
 		}
 
-		spec := &experimentation.TestSpecification{}
-		if nil != jsonpb.Unmarshal(strings.NewReader(details), spec) {
+		anyConfig := &anypb.Any{}
+		if nil != jsonpb.Unmarshal(strings.NewReader(details), anyConfig) {
 			return nil, err
 		}
-		experiment.TestSpecification = spec
+		experiment.TestConfig = anyConfig
 
 		experiments = append(experiments, &experiment)
 	}

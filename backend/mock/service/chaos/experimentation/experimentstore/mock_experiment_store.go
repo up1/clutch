@@ -51,7 +51,7 @@ func (fs *mockExperimentStore) GetExperiments(context.Context) ([]*experimentati
 	experiment.Id = 1
 	experiment.TestSpecification = spec
 
-	experiments = append(experiments, &experiment)
+	// experiments = append(experiments, &experiment)
 
 	return experiments, nil
 }
