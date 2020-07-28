@@ -2323,7 +2323,7 @@ export namespace clutch {
                     id?: (number|Long|null);
 
                     /** Experiment testConfig */
-                    testConfig?: (google.protobuf.IAny|null);
+                    testConfig?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an Experiment. */
@@ -2339,7 +2339,7 @@ export namespace clutch {
                     public id: (number|Long);
 
                     /** Experiment testConfig. */
-                    public testConfig?: (google.protobuf.IAny|null);
+                    public testConfig?: (google.protobuf.IStruct|null);
 
                     /**
                      * Verifies an Experiment message.
@@ -2729,15 +2729,23 @@ export namespace clutch {
                      */
                     type DeleteExperimentsCallback = (error: (Error|null), response?: clutch.chaos.experimentation.v1.DeleteExperimentsResponse) => void;
                 }
+            }
+        }
+
+        /** Namespace serverexperimentation. */
+        namespace serverexperimentation {
+
+            /** Namespace v1. */
+            namespace v1 {
 
                 /** Properties of a ServerTestSpecification. */
                 interface IServerTestSpecification {
 
                     /** ServerTestSpecification abort */
-                    abort?: (clutch.chaos.experimentation.v1.IAbortFault|null);
+                    abort?: (clutch.chaos.serverexperimentation.v1.IAbortFault|null);
 
                     /** ServerTestSpecification latency */
-                    latency?: (clutch.chaos.experimentation.v1.ILatencyFault|null);
+                    latency?: (clutch.chaos.serverexperimentation.v1.ILatencyFault|null);
                 }
 
                 /** Represents a ServerTestSpecification. */
@@ -2747,13 +2755,13 @@ export namespace clutch {
                      * Constructs a new ServerTestSpecification.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: clutch.chaos.experimentation.v1.IServerTestSpecification);
+                    constructor(properties?: clutch.chaos.serverexperimentation.v1.IServerTestSpecification);
 
                     /** ServerTestSpecification abort. */
-                    public abort?: (clutch.chaos.experimentation.v1.IAbortFault|null);
+                    public abort?: (clutch.chaos.serverexperimentation.v1.IAbortFault|null);
 
                     /** ServerTestSpecification latency. */
-                    public latency?: (clutch.chaos.experimentation.v1.ILatencyFault|null);
+                    public latency?: (clutch.chaos.serverexperimentation.v1.ILatencyFault|null);
 
                     /** ServerTestSpecification config. */
                     public config?: ("abort"|"latency");
@@ -2770,7 +2778,7 @@ export namespace clutch {
                      * @param object Plain object
                      * @returns ServerTestSpecification
                      */
-                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.ServerTestSpecification;
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.serverexperimentation.v1.ServerTestSpecification;
 
                     /**
                      * Creates a plain object from a ServerTestSpecification message. Also converts values to other types if specified.
@@ -2778,7 +2786,7 @@ export namespace clutch {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: clutch.chaos.experimentation.v1.ServerTestSpecification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: clutch.chaos.serverexperimentation.v1.ServerTestSpecification, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this ServerTestSpecification to JSON.
@@ -2804,7 +2812,7 @@ export namespace clutch {
                      * Constructs a new ClusterPairTarget.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: clutch.chaos.experimentation.v1.IClusterPairTarget);
+                    constructor(properties?: clutch.chaos.serverexperimentation.v1.IClusterPairTarget);
 
                     /** ClusterPairTarget downstreamCluster. */
                     public downstreamCluster: string;
@@ -2824,7 +2832,7 @@ export namespace clutch {
                      * @param object Plain object
                      * @returns ClusterPairTarget
                      */
-                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.ClusterPairTarget;
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.serverexperimentation.v1.ClusterPairTarget;
 
                     /**
                      * Creates a plain object from a ClusterPairTarget message. Also converts values to other types if specified.
@@ -2832,7 +2840,7 @@ export namespace clutch {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: clutch.chaos.experimentation.v1.ClusterPairTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: clutch.chaos.serverexperimentation.v1.ClusterPairTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this ClusterPairTarget to JSON.
@@ -2845,7 +2853,7 @@ export namespace clutch {
                 interface IAbortFault {
 
                     /** AbortFault clusterPair */
-                    clusterPair?: (clutch.chaos.experimentation.v1.IClusterPairTarget|null);
+                    clusterPair?: (clutch.chaos.serverexperimentation.v1.IClusterPairTarget|null);
 
                     /** AbortFault percent */
                     percent?: (number|null);
@@ -2861,10 +2869,10 @@ export namespace clutch {
                      * Constructs a new AbortFault.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: clutch.chaos.experimentation.v1.IAbortFault);
+                    constructor(properties?: clutch.chaos.serverexperimentation.v1.IAbortFault);
 
                     /** AbortFault clusterPair. */
-                    public clusterPair?: (clutch.chaos.experimentation.v1.IClusterPairTarget|null);
+                    public clusterPair?: (clutch.chaos.serverexperimentation.v1.IClusterPairTarget|null);
 
                     /** AbortFault percent. */
                     public percent: number;
@@ -2887,7 +2895,7 @@ export namespace clutch {
                      * @param object Plain object
                      * @returns AbortFault
                      */
-                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.AbortFault;
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.serverexperimentation.v1.AbortFault;
 
                     /**
                      * Creates a plain object from an AbortFault message. Also converts values to other types if specified.
@@ -2895,7 +2903,7 @@ export namespace clutch {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: clutch.chaos.experimentation.v1.AbortFault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: clutch.chaos.serverexperimentation.v1.AbortFault, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this AbortFault to JSON.
@@ -2908,7 +2916,7 @@ export namespace clutch {
                 interface ILatencyFault {
 
                     /** LatencyFault clusterPair */
-                    clusterPair?: (clutch.chaos.experimentation.v1.IClusterPairTarget|null);
+                    clusterPair?: (clutch.chaos.serverexperimentation.v1.IClusterPairTarget|null);
 
                     /** LatencyFault percent */
                     percent?: (number|null);
@@ -2924,10 +2932,10 @@ export namespace clutch {
                      * Constructs a new LatencyFault.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: clutch.chaos.experimentation.v1.ILatencyFault);
+                    constructor(properties?: clutch.chaos.serverexperimentation.v1.ILatencyFault);
 
                     /** LatencyFault clusterPair. */
-                    public clusterPair?: (clutch.chaos.experimentation.v1.IClusterPairTarget|null);
+                    public clusterPair?: (clutch.chaos.serverexperimentation.v1.IClusterPairTarget|null);
 
                     /** LatencyFault percent. */
                     public percent: number;
@@ -2950,7 +2958,7 @@ export namespace clutch {
                      * @param object Plain object
                      * @returns LatencyFault
                      */
-                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.LatencyFault;
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.serverexperimentation.v1.LatencyFault;
 
                     /**
                      * Creates a plain object from a LatencyFault message. Also converts values to other types if specified.
@@ -2958,7 +2966,7 @@ export namespace clutch {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: clutch.chaos.experimentation.v1.LatencyFault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: clutch.chaos.serverexperimentation.v1.LatencyFault, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this LatencyFault to JSON.

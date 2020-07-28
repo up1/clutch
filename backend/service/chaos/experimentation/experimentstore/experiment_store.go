@@ -9,9 +9,8 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/golang/protobuf/jsonpb"
-	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/any"
-	anypb "github.com/golang/protobuf/ptypes/any"
+	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 
@@ -64,16 +63,16 @@ func (fs *experimentStore) CreateExperiments(ctx context.Context, experiments []
 	builder := psql.Insert(experimentsTableName).Columns(experimentColumns...)
 
 	for _, experiment := range experiments {
-		anyTestConfig, err := ptypes.MarshalAny(experiment.GetTestConfig())
-		if err != nil {
-			return err
-		}
+		// anyTestConfig, err := ptypes.MarshalAny(experiment.GetTestConfig())
+		// if err != nil {
+		// return err
+		// }
 
 		marshaler := jsonpb.Marshaler{}
 		buf := &bytes.Buffer{}
-		err2 := marshaler.Marshal(buf, anyTestConfig)
+		err2 := marshaler.Marshal(buf, experiment.GetTestConfig())
 		if err2 != nil {
-			return err
+			return err2
 		}
 		s := buf.String()
 		builder = builder.Values(
@@ -136,10 +135,13 @@ func (fs *experimentStore) GetExperiments(ctx context.Context) ([]*experimentati
 			return nil, err
 		}
 
-		anyConfig := &anypb.Any{}
+		anyConfig := &structpb.Struct{}
 		if nil != jsonpb.Unmarshal(strings.NewReader(details), anyConfig) {
 			return nil, err
 		}
+
+		// typedConfig := &serverexperimentation.ServerTestSpecification{}
+		// jsonpb.Unmarshal(anyConfig, &typedConfig)
 		experiment.TestConfig = anyConfig
 
 		experiments = append(experiments, &experiment)

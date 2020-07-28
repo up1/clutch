@@ -146,7 +146,7 @@ export const StartAbortExperiment = ({ heading }) => {
         return client.post("/v1/experiments/create", {
           experiments: [
             {
-              testSpecification: {
+              testConfig: {
                 abort: {
                   clusterPair: {
                     downstreamCluster: clusterPairTargetData.downstreamCluster,
@@ -182,7 +182,7 @@ export const StartLatencyExperiment = ({ heading }) => {
         return client.post("/v1/experiments/create", {
           experiments: [
             {
-              testSpecification: {
+              testConfig: {
                 latency: {
                   clusterPair: {
                     downstreamCluster: clusterPairTargetData.downstreamCluster,

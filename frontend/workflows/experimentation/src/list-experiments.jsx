@@ -5,7 +5,7 @@ import { Button, Container } from "@material-ui/core";
 import { StartAbortExperiment, StartLatencyExperiment } from "./start-experiment";
 
 function renderAbortData(experiment) {
-  const ts = experiment.testSpecification;
+  const ts = experiment.testConfig;
   return (
     <Row
       key={experiment.id}
@@ -20,7 +20,7 @@ function renderAbortData(experiment) {
 }
 
 function renderLatencyData(experiment) {
-  const ts = experiment.testSpecification;
+  const ts = experiment.testConfig;
   return (
     <Row
       key={experiment.id}
@@ -54,7 +54,7 @@ const ListExperiments = () => {
         headings={["Downstream Cluster", "Upstream Cluster", "Percentage", "HTTP Status"]}
       >
         {experiments.map(e => {
-          if (e.testSpecification.abort) {
+          if (e.testConfig.abort) {
             return renderAbortData(e);
           }
           return renderLatencyData(e);

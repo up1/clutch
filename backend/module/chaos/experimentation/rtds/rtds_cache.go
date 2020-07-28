@@ -8,7 +8,6 @@ import (
 
 	gcpDiscovery "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v2"
 	gcpCache "github.com/envoyproxy/go-control-plane/pkg/cache"
-	"github.com/golang/protobuf/ptypes"
 	pstruct "github.com/golang/protobuf/ptypes/struct"
 	"github.com/mitchellh/hashstructure"
 	"go.uber.org/zap"
@@ -40,28 +39,28 @@ func PeriodicallyRefreshCache(s *Server) {
 
 func refreshCache(ctx context.Context, store experimentstore.ExperimentStore, snapshotCache gcpCache.SnapshotCache, rtdsLayerName string,
 	logger *zap.SugaredLogger) {
-	allExperiments, err := store.GetExperiments(ctx)
-	if err != nil {
-		logger.Errorw("Failed to get data from experiments store", "error", err)
-		return
-	}
+	// allExperiments, err := store.GetExperiments(ctx)
+	// if err != nil {
+	// 	logger.Errorw("Failed to get data from experiments store", "error", err)
+	// 	return
+	// }
 
 	// Group faults by upstream cluster
 	upstreamClusterFaultMap := make(map[string][]*experimentation.Experiment)
-	for _, experiment := range allExperiments {
-		if !isFaultTest(experiment) {
-			continue
-		}
-		clusterPair := getClusterPair(experiment)
-		upstreamClusterFaultMap[clusterPair.UpstreamCluster] =
-			append(upstreamClusterFaultMap[clusterPair.UpstreamCluster], experiment)
-	}
+	// for _, experiment := range allExperiments {
+	// 	if !isFaultTest(experiment) {
+	// 		continue
+	// 	}
+	// 	clusterPair := getClusterPair(experiment)
+	// 	upstreamClusterFaultMap[clusterPair.UpstreamCluster] =
+	// 		append(upstreamClusterFaultMap[clusterPair.UpstreamCluster], experiment)
+	// }
 
 	// Settings snapshot with empty faults to remove the faults
 	for _, upstreamCluster := range snapshotCache.GetStatusKeys() {
 		if _, exist := upstreamClusterFaultMap[upstreamCluster]; !exist {
 			logger.Infow("Removing faults for upstream cluster", "cluster", upstreamCluster)
-			err = setSnapshot(snapshotCache, rtdsLayerName, upstreamCluster, []*experimentation.Experiment{}, logger)
+			err := setSnapshot(snapshotCache, rtdsLayerName, upstreamCluster, []*experimentation.Experiment{}, logger)
 			if err != nil {
 				logger.Errorw("Unable to unset the fault for upstream cluster", "cluster", upstreamCluster,
 					"error", err)
@@ -87,30 +86,30 @@ func setSnapshot(snapshotCache gcpCache.SnapshotCache, rtdsLayerName string, ups
 	var fieldMap = map[string]*pstruct.Value{}
 
 	// No experiments meaning clear all experiments for the given upstream cluster
-	if len(experiments) != 0 {
-		for _, experiment := range experiments {
-			percentageKey, percentageValue, faultKey, faultValue := createRuntimeKeys(experiment, logger)
+	// if len(experiments) != 0 {
+	// 	for _, experiment := range experiments {
+	// 		percentageKey, percentageValue, faultKey, faultValue := createRuntimeKeys(experiment, logger)
 
-			fieldMap[percentageKey] = &pstruct.Value{
-				Kind: &pstruct.Value_NumberValue{
-					NumberValue: float64(percentageValue),
-				},
-			}
+	// 		fieldMap[percentageKey] = &pstruct.Value{
+	// 			Kind: &pstruct.Value_NumberValue{
+	// 				NumberValue: float64(percentageValue),
+	// 			},
+	// 		}
 
-			fieldMap[faultKey] = &pstruct.Value{
-				Kind: &pstruct.Value_NumberValue{
-					NumberValue: float64(faultValue),
-				},
-			}
-			clusterPair := getClusterPair(experiment)
-			logger.Debugw("Fault details",
-				"upstream_cluster", clusterPair.UpstreamCluster,
-				"downstream_cluster", clusterPair.DownstreamCluster,
-				"fault_type", faultKey,
-				"percentage", percentageValue,
-				"value", faultValue)
-		}
-	}
+	// 		fieldMap[faultKey] = &pstruct.Value{
+	// 			Kind: &pstruct.Value_NumberValue{
+	// 				NumberValue: float64(faultValue),
+	// 			},
+	// 		}
+	// 		clusterPair := getClusterPair(experiment)
+	// 		logger.Debugw("Fault details",
+	// 			"upstream_cluster", clusterPair.UpstreamCluster,
+	// 			"downstream_cluster", clusterPair.DownstreamCluster,
+	// 			"fault_type", faultKey,
+	// 			"percentage", percentageValue,
+	// 			"value", faultValue)
+	// 	}
+	// }
 
 	runtimes := []gcpCache.Resource{
 		&gcpDiscovery.Runtime{
@@ -148,83 +147,85 @@ func setSnapshot(snapshotCache gcpCache.SnapshotCache, rtdsLayerName string, ups
 }
 
 func createRuntimeKeys(experiment *experimentation.Experiment, logger *zap.SugaredLogger) (string, float32, string, int32) {
-	var percentageKey string
-	var percentageValue float32
-	var faultKey string
-	var faultValue int32
+	// var percentageKey string
+	// var percentageValue float32
+	// var faultKey string
+	// var faultValue int32
 
-	testSpecification := &experimentation.ServerTestSpecification{}
-	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+	return "1", 2.0, "1", 3
 
-	switch testSpecification.GetConfig().(type) {
-	case *experimentation.ServerTestSpecification_Abort:
-		abort := testSpecification.GetAbort()
-		percentageValue = abort.Percent
-		faultValue = abort.HttpStatus
+	// testSpecification := &experimentation.ServerTestSpecification{}
+	// ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
 
-		target := abort.GetClusterPair()
-		if target.DownstreamCluster == "" {
-			percentageKey = HTTPPercentageWithoutDownstream
-			faultKey = HTTPStatusWithoutDownstream
-		} else {
-			percentageKey = fmt.Sprintf(HTTPPercentageWithDownstream, target.DownstreamCluster)
-			faultKey = fmt.Sprintf(HTTPStatusWithDownstream, target.DownstreamCluster)
-		}
-	case *experimentation.ServerTestSpecification_Latency:
-		latency := testSpecification.GetLatency()
-		percentageValue = latency.Percent
-		faultValue = latency.DurationMs
+	// switch testSpecification.GetConfig().(type) {
+	// case *experimentation.ServerTestSpecification_Abort:
+	// 	abort := testSpecification.GetAbort()
+	// 	percentageValue = abort.Percent
+	// 	faultValue = abort.HttpStatus
 
-		target := latency.GetClusterPair()
-		if target.DownstreamCluster == "" {
-			percentageKey = LatencyPercentageWithoutDownstream
-			faultKey = LatencyDurationWithoutDownstream
-		} else {
-			percentageKey = fmt.Sprintf(LatencyPercentageWithDownstream, target.DownstreamCluster)
-			faultKey = fmt.Sprintf(LatencyDurationWithDownstream, target.DownstreamCluster)
-		}
-	default:
-		logger.Errorw("Unknown fault type: %t", experiment)
-		panic("Unknown fault type")
-	}
+	// 	target := abort.GetClusterPair()
+	// 	if target.DownstreamCluster == "" {
+	// 		percentageKey = HTTPPercentageWithoutDownstream
+	// 		faultKey = HTTPStatusWithoutDownstream
+	// 	} else {
+	// 		percentageKey = fmt.Sprintf(HTTPPercentageWithDownstream, target.DownstreamCluster)
+	// 		faultKey = fmt.Sprintf(HTTPStatusWithDownstream, target.DownstreamCluster)
+	// 	}
+	// case *experimentation.ServerTestSpecification_Latency:
+	// 	latency := testSpecification.GetLatency()
+	// 	percentageValue = latency.Percent
+	// 	faultValue = latency.DurationMs
 
-	return percentageKey, percentageValue, faultKey, faultValue
+	// 	target := latency.GetClusterPair()
+	// 	if target.DownstreamCluster == "" {
+	// 		percentageKey = LatencyPercentageWithoutDownstream
+	// 		faultKey = LatencyDurationWithoutDownstream
+	// 	} else {
+	// 		percentageKey = fmt.Sprintf(LatencyPercentageWithDownstream, target.DownstreamCluster)
+	// 		faultKey = fmt.Sprintf(LatencyDurationWithDownstream, target.DownstreamCluster)
+	// 	}
+	// default:
+	// 	logger.Errorw("Unknown fault type: %t", experiment)
+	// 	panic("Unknown fault type")
+	// }
+
+	// return percentageKey, percentageValue, faultKey, faultValue
 }
 
-func isFaultTest(experiment *experimentation.Experiment) bool {
-	testSpecification := &experimentation.ServerTestSpecification{}
-	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+// func isFaultTest(experiment *experimentation.Experiment) bool {
+// 	testSpecification := &experimentation.ServerTestSpecification{}
+// 	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
 
-	if !ptypes.Is(experiment.GetTestConfig(), testSpecification) {
-		return false
-	}
+// 	if !ptypes.Is(experiment.GetTestConfig(), testSpecification) {
+// 		return false
+// 	}
 
-	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+// 	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
 
-	switch testSpecification.GetConfig().(type) {
-	case *experimentation.ServerTestSpecification_Abort:
-		return true
-	case *experimentation.ServerTestSpecification_Latency:
-		return true
-	default:
-		return false
-	}
-}
+// 	switch testSpecification.GetConfig().(type) {
+// 	case *experimentation.ServerTestSpecification_Abort:
+// 		return true
+// 	case *experimentation.ServerTestSpecification_Latency:
+// 		return true
+// 	default:
+// 		return false
+// 	}
+// }
 
-func getClusterPair(experiment *experimentation.Experiment) *experimentation.ClusterPairTarget {
-	testSpecification := &experimentation.ServerTestSpecification{}
-	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+// func getClusterPair(experiment *experimentation.Experiment) *experimentation.ClusterPairTarget {
+// 	testSpecification := &experimentation.ServerTestSpecification{}
+// 	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
 
-	switch testSpecification.GetConfig().(type) {
-	case *experimentation.ServerTestSpecification_Abort:
-		abort := testSpecification.GetAbort()
-		return abort.GetClusterPair()
-	case *experimentation.ServerTestSpecification_Latency:
-		latency := testSpecification.GetLatency()
-		return latency.GetClusterPair()
-	}
-	panic("unknown fault type")
-}
+// 	switch testSpecification.GetConfig().(type) {
+// 	case *experimentation.ServerTestSpecification_Abort:
+// 		abort := testSpecification.GetAbort()
+// 		return abort.GetClusterPair()
+// 	case *experimentation.ServerTestSpecification_Latency:
+// 		latency := testSpecification.GetLatency()
+// 		return latency.GetClusterPair()
+// 	}
+// 	panic("unknown fault type")
+// }
 
 func computeChecksum(item interface{}) (string, error) {
 	hash, err := hashstructure.Hash(item, nil)
