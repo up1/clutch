@@ -6,8 +6,13 @@ package api
 
 import (
 	"errors"
+	"fmt"
 	"github.com/golang/protobuf/proto"
-	serverexperimentationv1 "github.com/lyft/clutch/backend/api/chaos/serverexperimentation/v1"
+	"github.com/golang/protobuf/ptypes"
+	mobilefaultinjectionv1 "github.com/lyft/clutch/backend/api/chaos/mobilefaultinjection/v1"
+
+	//experimentationv1 "github.com/lyft/clutch-preview/backend/api/chaos/experimentation/v1"
+	serverexperimentation "github.com/lyft/clutch/backend/api/chaos/serverexperimentation/v1"
 	"reflect"
 
 	"github.com/golang/protobuf/ptypes/any"
@@ -36,14 +41,59 @@ type Service struct {
 }
 
 type ConverterRegistry struct {
-	services     map[reflect.Type]Service // map of types to services.
+	services     map[string]func(experiment *experimentation.Experiment)experimentation.ExperimentListViewModel // map of types to services.
 	serviceTypes []reflect.Type           // keep an ordered slice of registered service types.
 }
 
 func NewServiceRegistry() *ConverterRegistry {
 	return &ConverterRegistry{
-		services: make(map[reflect.Type]Service),
+		services: make(map[string]func(experiment *experimentation.Experiment)experimentation.ExperimentListViewModel),
 	}
+}
+
+func castToModel(experiment *experimentation.Experiment) experimentation.ExperimentListViewModel {
+	testSpecification := &serverexperimentation.ServerTestSpecification{}
+	ptypes.UnmarshalAny(experiment.GetTestConfig(), testSpecification)
+
+	viewModel := experimentation.ExperimentListViewModel{}
+
+	var clusterPair *serverexperimentation.ClusterPairTarget
+	var description string
+
+	switch testSpecification.GetConfig().(type) {
+	case *serverexperimentation.ServerTestSpecification_Abort:
+		abort := testSpecification.GetAbort()
+		clusterPair = abort.GetClusterPair()
+		description = fmt.Sprintf("%d abort %.2f%%", abort.GetHttpStatus(), abort.GetPercent())
+	case *serverexperimentation.ServerTestSpecification_Latency:
+		latency := testSpecification.GetLatency()
+		clusterPair = latency.GetClusterPair()
+		description = fmt.Sprintf("%dms delay %.2f%%", latency.GetDurationMs(), latency.GetPercent())
+	default:
+		break
+	}
+
+	viewModel.Identifier = string(experiment.GetId())
+	viewModel.Targets = fmt.Sprintf("%s cluster to %s cluster",
+		clusterPair.GetUpstreamCluster(),
+		clusterPair.GetDownstreamCluster())
+	viewModel.Type = "Server-side Fault Injection Test"
+	viewModel.Description = description
+	viewModel.Status = "Stopped"
+
+	return viewModel
+}
+
+func castMobileFaultInjectionTestToModel(experiment *experimentation.Experiment) experimentation.ExperimentListViewModel {
+	test := &mobilefaultinjectionv1.Test{}
+	ptypes.UnmarshalAny(experiment.GetTestConfig(), test)
+
+	viewModel := experimentation.ExperimentListViewModel{}
+	viewModel.Identifier = string(experiment.GetId())
+	viewModel.Targets = test.Endpoint
+	viewModel.Type = "Mobile Fault Injection Tests"
+	viewModel.Status = "Running"
+	return viewModel
 }
 
 // New instantiates a Service object.
@@ -71,8 +121,12 @@ func New(_ *any.Any, logger *zap.Logger, scope tally.Scope) (module.Module, erro
 
 func (s *Service) Register(r module.Registrar) error {
 	experimentation.RegisterExperimentsAPIServer(r.GRPCServer(), s)
-	proto.RegisterType((*serverexperimentationv1.ServerTestSpecification)(nil),
+	proto.RegisterType((*serverexperimentation.ServerTestSpecification)(nil),
 		"clutch.chaos.serverexperimentation.v1.ServerTestSpecification")
+	proto.RegisterType((*mobilefaultinjectionv1.Test)(nil),
+		"clutch.chaos.mobilefaultinjection.v1.Test")
+	s.converterRegistry.services["type.googleapis.com/clutch.chaos.serverexperimentation.v1.ServerTestSpecification"] = castToModel
+	s.converterRegistry.services["type.googleapis.com/clutch.chaos.mobilefaultinjection.v1.Test"] = castMobileFaultInjectionTestToModel
 	return r.RegisterJSONGateway(experimentation.RegisterExperimentsAPIHandler)
 }
 
@@ -95,7 +149,14 @@ func (s *Service) GetExperiments(ctx context.Context, _ *experimentation.GetExpe
 		return &experimentation.GetExperimentsResponse{}, err
 	}
 
-	return &experimentation.GetExperimentsResponse{Experiments: experiments}, nil
+	var items[] *experimentation.ExperimentListViewModel
+	for _, experiment := range experiments {
+		typeURL := experiment.TestConfig.TypeUrl
+		viewModel := s.converterRegistry.services[typeURL](experiment)
+		items = append(items, &viewModel)
+	}
+
+	return &experimentation.GetExperimentsResponse{Experiments: items}, nil
 }
 
 // DeleteExperiments deletes experiments from the experiment store.

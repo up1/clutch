@@ -125,6 +125,37 @@ const LatencyExperimentDetails = () => {
   );
 };
 
+const MobileFaultInjectionExperimentDetails = () => {
+  const { onSubmit, onBack } = useWizardContext();
+  const mobileFaultInjectionExperimentData = useDataLayout("mobileFaultInjectionExperimentData");
+  const mobileFaultInjectionExperiment = mobileFaultInjectionExperimentData.displayValue();
+  const update = (key, value) => {
+    mobileFaultInjectionExperimentData.updateData(key, value);
+  };
+
+  return (
+    <WizardStep error={mobileFaultInjectionExperimentData.error}>
+      <MetadataTable
+        onUpdate={update}
+        data={[
+          {
+            name: "Endpoint",
+            value: mobileFaultInjectionExperiment.endpoint,
+            input: {
+              type: "string",
+              key: "endpoint",
+            },
+          },
+        ]}
+      />
+      <Grid container justify="center">
+        <Button text="Back" onClick={onBack} />
+        <Button text="Next" destructive onClick={onSubmit} />
+      </Grid>
+    </WizardStep>
+  );
+};
+
 const Confirm = () => {
   const startData = useDataLayout("startData");
 
@@ -132,6 +163,34 @@ const Confirm = () => {
     <WizardStep error={startData.error} isLoading={startData.isLoading}>
       <Confirmation action="Start" />
     </WizardStep>
+  );
+};
+
+export const StartMobileFaultInjectionExperiment = ({ heading }) => {
+  const dataLayout = {
+    mobileFaultInjectionExperimentData: {},
+    startData: {
+      deps: ["mobileFaultInjectionExperimentData"],
+      hydrator: (mobileFaultInjectionExperimentData) => {
+        return client.post("/v1/experiments/create", {
+          experiments: [
+            {
+              testConfig: {
+                "@type": "type.googleapis.com/clutch.chaos.mobilefaultinjection.v1.Test",
+                endpoint: mobileFaultInjectionExperimentData.endpoint,
+              },
+            },
+          ],
+        });
+      },
+    },
+  };
+
+  return (
+    <Wizard dataLayout={dataLayout} heading={heading}>
+      <MobileFaultInjectionExperimentDetails name="mobilefaultinjection" />
+      <Confirm name="Confirmation" />
+    </Wizard>
   );
 };
 
@@ -147,6 +206,7 @@ export const StartAbortExperiment = ({ heading }) => {
           experiments: [
             {
               testConfig: {
+                "@type": "type.googleapis.com/clutch.chaos.serverexperimentation.v1.ServerTestSpecification",
                 abort: {
                   clusterPair: {
                     downstreamCluster: clusterPairTargetData.downstreamCluster,

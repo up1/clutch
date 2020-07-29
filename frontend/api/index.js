@@ -5662,24 +5662,28 @@ export const clutch = $root.clutch = (() => {
                     return ExperimentModel;
                 })();
 
-                v1.ExperimentViewModel = (function() {
+                v1.ExperimentListViewModel = (function() {
 
                     /**
-                     * Properties of an ExperimentViewModel.
+                     * Properties of an ExperimentListViewModel.
                      * @memberof clutch.chaos.experimentation.v1
-                     * @interface IExperimentViewModel
-                     * @property {string|null} [cluster] ExperimentViewModel cluster
+                     * @interface IExperimentListViewModel
+                     * @property {string|null} [identifier] ExperimentListViewModel identifier
+                     * @property {string|null} [targets] ExperimentListViewModel targets
+                     * @property {string|null} [type] ExperimentListViewModel type
+                     * @property {string|null} [description] ExperimentListViewModel description
+                     * @property {string|null} [status] ExperimentListViewModel status
                      */
 
                     /**
-                     * Constructs a new ExperimentViewModel.
+                     * Constructs a new ExperimentListViewModel.
                      * @memberof clutch.chaos.experimentation.v1
-                     * @classdesc Represents an ExperimentViewModel.
-                     * @implements IExperimentViewModel
+                     * @classdesc Represents an ExperimentListViewModel.
+                     * @implements IExperimentListViewModel
                      * @constructor
-                     * @param {clutch.chaos.experimentation.v1.IExperimentViewModel=} [properties] Properties to set
+                     * @param {clutch.chaos.experimentation.v1.IExperimentListViewModel=} [properties] Properties to set
                      */
-                    function ExperimentViewModel(properties) {
+                    function ExperimentListViewModel(properties) {
                         if (properties)
                             for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -5687,79 +5691,144 @@ export const clutch = $root.clutch = (() => {
                     }
 
                     /**
-                     * ExperimentViewModel cluster.
-                     * @member {string} cluster
-                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * ExperimentListViewModel identifier.
+                     * @member {string} identifier
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
                      * @instance
                      */
-                    ExperimentViewModel.prototype.cluster = "";
+                    ExperimentListViewModel.prototype.identifier = "";
 
                     /**
-                     * Verifies an ExperimentViewModel message.
+                     * ExperimentListViewModel targets.
+                     * @member {string} targets
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
+                     * @instance
+                     */
+                    ExperimentListViewModel.prototype.targets = "";
+
+                    /**
+                     * ExperimentListViewModel type.
+                     * @member {string} type
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
+                     * @instance
+                     */
+                    ExperimentListViewModel.prototype.type = "";
+
+                    /**
+                     * ExperimentListViewModel description.
+                     * @member {string} description
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
+                     * @instance
+                     */
+                    ExperimentListViewModel.prototype.description = "";
+
+                    /**
+                     * ExperimentListViewModel status.
+                     * @member {string} status
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
+                     * @instance
+                     */
+                    ExperimentListViewModel.prototype.status = "";
+
+                    /**
+                     * Verifies an ExperimentListViewModel message.
                      * @function verify
-                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
                      * @static
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExperimentViewModel.verify = function verify(message) {
+                    ExperimentListViewModel.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
-                        if (message.cluster != null && message.hasOwnProperty("cluster"))
-                            if (!$util.isString(message.cluster))
-                                return "cluster: string expected";
+                        if (message.identifier != null && message.hasOwnProperty("identifier"))
+                            if (!$util.isString(message.identifier))
+                                return "identifier: string expected";
+                        if (message.targets != null && message.hasOwnProperty("targets"))
+                            if (!$util.isString(message.targets))
+                                return "targets: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            if (!$util.isString(message.type))
+                                return "type: string expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        if (message.status != null && message.hasOwnProperty("status"))
+                            if (!$util.isString(message.status))
+                                return "status: string expected";
                         return null;
                     };
 
                     /**
-                     * Creates an ExperimentViewModel message from a plain object. Also converts values to their respective internal types.
+                     * Creates an ExperimentListViewModel message from a plain object. Also converts values to their respective internal types.
                      * @function fromObject
-                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
                      * @static
                      * @param {Object.<string,*>} object Plain object
-                     * @returns {clutch.chaos.experimentation.v1.ExperimentViewModel} ExperimentViewModel
+                     * @returns {clutch.chaos.experimentation.v1.ExperimentListViewModel} ExperimentListViewModel
                      */
-                    ExperimentViewModel.fromObject = function fromObject(object) {
-                        if (object instanceof $root.clutch.chaos.experimentation.v1.ExperimentViewModel)
+                    ExperimentListViewModel.fromObject = function fromObject(object) {
+                        if (object instanceof $root.clutch.chaos.experimentation.v1.ExperimentListViewModel)
                             return object;
-                        let message = new $root.clutch.chaos.experimentation.v1.ExperimentViewModel();
-                        if (object.cluster != null)
-                            message.cluster = String(object.cluster);
+                        let message = new $root.clutch.chaos.experimentation.v1.ExperimentListViewModel();
+                        if (object.identifier != null)
+                            message.identifier = String(object.identifier);
+                        if (object.targets != null)
+                            message.targets = String(object.targets);
+                        if (object.type != null)
+                            message.type = String(object.type);
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        if (object.status != null)
+                            message.status = String(object.status);
                         return message;
                     };
 
                     /**
-                     * Creates a plain object from an ExperimentViewModel message. Also converts values to other types if specified.
+                     * Creates a plain object from an ExperimentListViewModel message. Also converts values to other types if specified.
                      * @function toObject
-                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
                      * @static
-                     * @param {clutch.chaos.experimentation.v1.ExperimentViewModel} message ExperimentViewModel
+                     * @param {clutch.chaos.experimentation.v1.ExperimentListViewModel} message ExperimentListViewModel
                      * @param {$protobuf.IConversionOptions} [options] Conversion options
                      * @returns {Object.<string,*>} Plain object
                      */
-                    ExperimentViewModel.toObject = function toObject(message, options) {
+                    ExperimentListViewModel.toObject = function toObject(message, options) {
                         if (!options)
                             options = {};
                         let object = {};
-                        if (options.defaults)
-                            object.cluster = "";
-                        if (message.cluster != null && message.hasOwnProperty("cluster"))
-                            object.cluster = message.cluster;
+                        if (options.defaults) {
+                            object.identifier = "";
+                            object.targets = "";
+                            object.type = "";
+                            object.description = "";
+                            object.status = "";
+                        }
+                        if (message.identifier != null && message.hasOwnProperty("identifier"))
+                            object.identifier = message.identifier;
+                        if (message.targets != null && message.hasOwnProperty("targets"))
+                            object.targets = message.targets;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = message.type;
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        if (message.status != null && message.hasOwnProperty("status"))
+                            object.status = message.status;
                         return object;
                     };
 
                     /**
-                     * Converts this ExperimentViewModel to JSON.
+                     * Converts this ExperimentListViewModel to JSON.
                      * @function toJSON
-                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentListViewModel
                      * @instance
                      * @returns {Object.<string,*>} JSON object
                      */
-                    ExperimentViewModel.prototype.toJSON = function toJSON() {
+                    ExperimentListViewModel.prototype.toJSON = function toJSON() {
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
 
-                    return ExperimentViewModel;
+                    return ExperimentListViewModel;
                 })();
 
                 v1.CreateExperimentsRequest = (function() {
@@ -6127,7 +6196,7 @@ export const clutch = $root.clutch = (() => {
                      * Properties of a GetExperimentsResponse.
                      * @memberof clutch.chaos.experimentation.v1
                      * @interface IGetExperimentsResponse
-                     * @property {Array.<clutch.chaos.experimentation.v1.IExperiment>|null} [experiments] GetExperimentsResponse experiments
+                     * @property {Array.<clutch.chaos.experimentation.v1.IExperimentListViewModel>|null} [experiments] GetExperimentsResponse experiments
                      */
 
                     /**
@@ -6148,7 +6217,7 @@ export const clutch = $root.clutch = (() => {
 
                     /**
                      * GetExperimentsResponse experiments.
-                     * @member {Array.<clutch.chaos.experimentation.v1.IExperiment>} experiments
+                     * @member {Array.<clutch.chaos.experimentation.v1.IExperimentListViewModel>} experiments
                      * @memberof clutch.chaos.experimentation.v1.GetExperimentsResponse
                      * @instance
                      */
@@ -6169,7 +6238,7 @@ export const clutch = $root.clutch = (() => {
                             if (!Array.isArray(message.experiments))
                                 return "experiments: array expected";
                             for (let i = 0; i < message.experiments.length; ++i) {
-                                let error = $root.clutch.chaos.experimentation.v1.Experiment.verify(message.experiments[i]);
+                                let error = $root.clutch.chaos.experimentation.v1.ExperimentListViewModel.verify(message.experiments[i]);
                                 if (error)
                                     return "experiments." + error;
                             }
@@ -6196,7 +6265,7 @@ export const clutch = $root.clutch = (() => {
                             for (let i = 0; i < object.experiments.length; ++i) {
                                 if (typeof object.experiments[i] !== "object")
                                     throw TypeError(".clutch.chaos.experimentation.v1.GetExperimentsResponse.experiments: object expected");
-                                message.experiments[i] = $root.clutch.chaos.experimentation.v1.Experiment.fromObject(object.experiments[i]);
+                                message.experiments[i] = $root.clutch.chaos.experimentation.v1.ExperimentListViewModel.fromObject(object.experiments[i]);
                             }
                         }
                         return message;
@@ -6220,7 +6289,7 @@ export const clutch = $root.clutch = (() => {
                         if (message.experiments && message.experiments.length) {
                             object.experiments = [];
                             for (let j = 0; j < message.experiments.length; ++j)
-                                object.experiments[j] = $root.clutch.chaos.experimentation.v1.Experiment.toObject(message.experiments[j], options);
+                                object.experiments[j] = $root.clutch.chaos.experimentation.v1.ExperimentListViewModel.toObject(message.experiments[j], options);
                         }
                         return object;
                     };
@@ -6564,6 +6633,130 @@ export const clutch = $root.clutch = (() => {
             })();
 
             return experimentation;
+        })();
+
+        chaos.mobilefaultinjection = (function() {
+
+            /**
+             * Namespace mobilefaultinjection.
+             * @memberof clutch.chaos
+             * @namespace
+             */
+            const mobilefaultinjection = {};
+
+            mobilefaultinjection.v1 = (function() {
+
+                /**
+                 * Namespace v1.
+                 * @memberof clutch.chaos.mobilefaultinjection
+                 * @namespace
+                 */
+                const v1 = {};
+
+                v1.Test = (function() {
+
+                    /**
+                     * Properties of a Test.
+                     * @memberof clutch.chaos.mobilefaultinjection.v1
+                     * @interface ITest
+                     * @property {string|null} [endpoint] Test endpoint
+                     */
+
+                    /**
+                     * Constructs a new Test.
+                     * @memberof clutch.chaos.mobilefaultinjection.v1
+                     * @classdesc Represents a Test.
+                     * @implements ITest
+                     * @constructor
+                     * @param {clutch.chaos.mobilefaultinjection.v1.ITest=} [properties] Properties to set
+                     */
+                    function Test(properties) {
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * Test endpoint.
+                     * @member {string} endpoint
+                     * @memberof clutch.chaos.mobilefaultinjection.v1.Test
+                     * @instance
+                     */
+                    Test.prototype.endpoint = "";
+
+                    /**
+                     * Verifies a Test message.
+                     * @function verify
+                     * @memberof clutch.chaos.mobilefaultinjection.v1.Test
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Test.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                            if (!$util.isString(message.endpoint))
+                                return "endpoint: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates a Test message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof clutch.chaos.mobilefaultinjection.v1.Test
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {clutch.chaos.mobilefaultinjection.v1.Test} Test
+                     */
+                    Test.fromObject = function fromObject(object) {
+                        if (object instanceof $root.clutch.chaos.mobilefaultinjection.v1.Test)
+                            return object;
+                        let message = new $root.clutch.chaos.mobilefaultinjection.v1.Test();
+                        if (object.endpoint != null)
+                            message.endpoint = String(object.endpoint);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a Test message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof clutch.chaos.mobilefaultinjection.v1.Test
+                     * @static
+                     * @param {clutch.chaos.mobilefaultinjection.v1.Test} message Test
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Test.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        let object = {};
+                        if (options.defaults)
+                            object.endpoint = "";
+                        if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                            object.endpoint = message.endpoint;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this Test to JSON.
+                     * @function toJSON
+                     * @memberof clutch.chaos.mobilefaultinjection.v1.Test
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Test.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return Test;
+                })();
+
+                return v1;
+            })();
+
+            return mobilefaultinjection;
         })();
 
         chaos.serverexperimentation = (function() {

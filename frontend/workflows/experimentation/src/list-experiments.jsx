@@ -4,31 +4,16 @@ import { Button, Container } from "@material-ui/core";
 
 import { StartAbortExperiment, StartLatencyExperiment } from "./start-experiment";
 
-function renderAbortData(experiment) {
-  const ts = experiment.testConfig;
+function renderListItem(experiment) {
   return (
     <Row
       key={experiment.id}
       data={[
-        ts.abort.clusterPair.downstreamCluster,
-        ts.abort.clusterPair.upstreamCluster,
-        ts.abort.percent,
-        ts.abort.httpStatus,
-      ]}
-    />
-  );
-}
-
-function renderLatencyData(experiment) {
-  const ts = experiment.testConfig;
-  return (
-    <Row
-      key={experiment.id}
-      data={[
-        ts.latency.clusterPair.downstreamCluster,
-        ts.latency.clusterPair.upstreamCluster,
-        ts.latency.percent,
-        ts.latency.httpStatus,
+        experiment.identifier,
+        experiment.targets,
+        experiment.type,
+        experiment.description,
+        experiment.status,
       ]}
     />
   );
@@ -43,7 +28,7 @@ const ListExperiments = () => {
     });
 
     return (
-      <Table headings={["Downstream Cluster", "Upstream Cluster", "Percentage", "HTTP Status"]} />
+      <Table headings={["Identifier", "Targets", "Type", "Description", "Status"]} />
     );
   }
 
@@ -51,13 +36,10 @@ const ListExperiments = () => {
     <Container>
       <Table
         data={experiments}
-        headings={["Downstream Cluster", "Upstream Cluster", "Percentage", "HTTP Status"]}
+        headings={["Identifier", "Targets", "Type", "Description", "Status"]}
       >
         {experiments.map(e => {
-          if (e.testConfig.abort) {
-            return renderAbortData(e);
-          }
-          return renderLatencyData(e);
+          return renderListItem(e);
         })}
       </Table>
       <Button onClick={StartAbortExperiment}>Start Abort Experiment</Button>

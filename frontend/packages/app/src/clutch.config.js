@@ -56,5 +56,8 @@ module.exports = {
     startLatencyExperiment: {
       trending: true,
     },
+    startMobileFaultInjectionExperiment: {
+      trending: true,
+    }
   },
 };

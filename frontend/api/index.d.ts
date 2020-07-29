@@ -2424,49 +2424,73 @@ export namespace clutch {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of an ExperimentViewModel. */
-                interface IExperimentViewModel {
+                /** Properties of an ExperimentListViewModel. */
+                interface IExperimentListViewModel {
 
-                    /** ExperimentViewModel cluster */
-                    cluster?: (string|null);
+                    /** ExperimentListViewModel identifier */
+                    identifier?: (string|null);
+
+                    /** ExperimentListViewModel targets */
+                    targets?: (string|null);
+
+                    /** ExperimentListViewModel type */
+                    type?: (string|null);
+
+                    /** ExperimentListViewModel description */
+                    description?: (string|null);
+
+                    /** ExperimentListViewModel status */
+                    status?: (string|null);
                 }
 
-                /** Represents an ExperimentViewModel. */
-                class ExperimentViewModel implements IExperimentViewModel {
+                /** Represents an ExperimentListViewModel. */
+                class ExperimentListViewModel implements IExperimentListViewModel {
 
                     /**
-                     * Constructs a new ExperimentViewModel.
+                     * Constructs a new ExperimentListViewModel.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: clutch.chaos.experimentation.v1.IExperimentViewModel);
+                    constructor(properties?: clutch.chaos.experimentation.v1.IExperimentListViewModel);
 
-                    /** ExperimentViewModel cluster. */
-                    public cluster: string;
+                    /** ExperimentListViewModel identifier. */
+                    public identifier: string;
+
+                    /** ExperimentListViewModel targets. */
+                    public targets: string;
+
+                    /** ExperimentListViewModel type. */
+                    public type: string;
+
+                    /** ExperimentListViewModel description. */
+                    public description: string;
+
+                    /** ExperimentListViewModel status. */
+                    public status: string;
 
                     /**
-                     * Verifies an ExperimentViewModel message.
+                     * Verifies an ExperimentListViewModel message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an ExperimentViewModel message from a plain object. Also converts values to their respective internal types.
+                     * Creates an ExperimentListViewModel message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ExperimentViewModel
+                     * @returns ExperimentListViewModel
                      */
-                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.ExperimentViewModel;
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.ExperimentListViewModel;
 
                     /**
-                     * Creates a plain object from an ExperimentViewModel message. Also converts values to other types if specified.
-                     * @param message ExperimentViewModel
+                     * Creates a plain object from an ExperimentListViewModel message. Also converts values to other types if specified.
+                     * @param message ExperimentListViewModel
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: clutch.chaos.experimentation.v1.ExperimentViewModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: clutch.chaos.experimentation.v1.ExperimentListViewModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ExperimentViewModel to JSON.
+                     * Converts this ExperimentListViewModel to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2620,7 +2644,7 @@ export namespace clutch {
                 interface IGetExperimentsResponse {
 
                     /** GetExperimentsResponse experiments */
-                    experiments?: (clutch.chaos.experimentation.v1.IExperiment[]|null);
+                    experiments?: (clutch.chaos.experimentation.v1.IExperimentListViewModel[]|null);
                 }
 
                 /** Represents a GetExperimentsResponse. */
@@ -2633,7 +2657,7 @@ export namespace clutch {
                     constructor(properties?: clutch.chaos.experimentation.v1.IGetExperimentsResponse);
 
                     /** GetExperimentsResponse experiments. */
-                    public experiments: clutch.chaos.experimentation.v1.IExperiment[];
+                    public experiments: clutch.chaos.experimentation.v1.IExperimentListViewModel[];
 
                     /**
                      * Verifies a GetExperimentsResponse message.
@@ -2830,6 +2854,62 @@ export namespace clutch {
                      * @param [response] DeleteExperimentsResponse
                      */
                     type DeleteExperimentsCallback = (error: (Error|null), response?: clutch.chaos.experimentation.v1.DeleteExperimentsResponse) => void;
+                }
+            }
+        }
+
+        /** Namespace mobilefaultinjection. */
+        namespace mobilefaultinjection {
+
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of a Test. */
+                interface ITest {
+
+                    /** Test endpoint */
+                    endpoint?: (string|null);
+                }
+
+                /** Represents a Test. */
+                class Test implements ITest {
+
+                    /**
+                     * Constructs a new Test.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: clutch.chaos.mobilefaultinjection.v1.ITest);
+
+                    /** Test endpoint. */
+                    public endpoint: string;
+
+                    /**
+                     * Verifies a Test message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Test message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Test
+                     */
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.mobilefaultinjection.v1.Test;
+
+                    /**
+                     * Creates a plain object from a Test message. Also converts values to other types if specified.
+                     * @param message Test
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: clutch.chaos.mobilefaultinjection.v1.Test, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Test to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
             }
         }

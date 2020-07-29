@@ -1,5 +1,5 @@
 import ListExperiments from "./list-experiments";
-import { StartAbortExperiment, StartLatencyExperiment } from "./start-experiment";
+import { StartAbortExperiment, StartLatencyExperiment, StartMobileFaultInjectionExperiment } from "./start-experiment";
 
 const register = function register() {
   return {
@@ -28,6 +28,18 @@ const register = function register() {
         displayName: "Start a Latency Experiment",
         description: "Start a Latency Experiment.",
         component: StartLatencyExperiment,
+      },
+      startAbortExperiment: {
+        path: "startabort",
+        displayName: "Start an Abort Experiment",
+        description: "Start an Abort Experiment.",
+        component: StartAbortExperiment,
+      },
+      startMobileFaultInjectionExperiment: {
+        path: "startMobileFaultInjectionExperiment",
+        displayName: "Start a MFI Experiment",
+        description: "Start a MFI Experiment",
+        component: StartMobileFaultInjectionExperiment,
       },
     },
   };

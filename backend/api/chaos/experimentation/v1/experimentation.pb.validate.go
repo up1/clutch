@@ -189,22 +189,30 @@ var _ interface {
 	ErrorName() string
 } = ExperimentModelValidationError{}
 
-// Validate checks the field values on ExperimentViewModel with the rules
+// Validate checks the field values on ExperimentListViewModel with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *ExperimentViewModel) Validate() error {
+func (m *ExperimentListViewModel) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	// no validation rules for Cluster
+	// no validation rules for Identifier
+
+	// no validation rules for Targets
+
+	// no validation rules for Type
+
+	// no validation rules for Description
+
+	// no validation rules for Status
 
 	return nil
 }
 
-// ExperimentViewModelValidationError is the validation error returned by
-// ExperimentViewModel.Validate if the designated constraints aren't met.
-type ExperimentViewModelValidationError struct {
+// ExperimentListViewModelValidationError is the validation error returned by
+// ExperimentListViewModel.Validate if the designated constraints aren't met.
+type ExperimentListViewModelValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -212,24 +220,24 @@ type ExperimentViewModelValidationError struct {
 }
 
 // Field function returns field value.
-func (e ExperimentViewModelValidationError) Field() string { return e.field }
+func (e ExperimentListViewModelValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ExperimentViewModelValidationError) Reason() string { return e.reason }
+func (e ExperimentListViewModelValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ExperimentViewModelValidationError) Cause() error { return e.cause }
+func (e ExperimentListViewModelValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ExperimentViewModelValidationError) Key() bool { return e.key }
+func (e ExperimentListViewModelValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ExperimentViewModelValidationError) ErrorName() string {
-	return "ExperimentViewModelValidationError"
+func (e ExperimentListViewModelValidationError) ErrorName() string {
+	return "ExperimentListViewModelValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ExperimentViewModelValidationError) Error() string {
+func (e ExperimentListViewModelValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -241,14 +249,14 @@ func (e ExperimentViewModelValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sExperimentViewModel.%s: %s%s",
+		"invalid %sExperimentListViewModel.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ExperimentViewModelValidationError{}
+var _ error = ExperimentListViewModelValidationError{}
 
 var _ interface {
 	Field() string
@@ -256,7 +264,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ExperimentViewModelValidationError{}
+} = ExperimentListViewModelValidationError{}
 
 // Validate checks the field values on CreateExperimentsRequest with the rules
 // defined in the proto definition for this message. If any rules are

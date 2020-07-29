@@ -21,8 +21,12 @@ message ExperimentModel {
   google.protobuf.Any test_config = 2;
 }
 
-message ExperimentViewModel {
-    string cluster = 1;
+message ExperimentListViewModel {
+    string identifier = 1;
+    string targets = 2;
+    string type = 3;
+    string description = 4;
+    string status = 5;
 }
 
 message CreateExperimentsRequest {
@@ -38,7 +42,7 @@ message GetExperimentsRequest {
 }
 
 message GetExperimentsResponse {
-  repeated Experiment experiments = 3;
+  repeated ExperimentListViewModel experiments = 3;
 }
 
 message DeleteExperimentsRequest {
