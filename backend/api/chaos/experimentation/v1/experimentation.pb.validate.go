@@ -112,6 +112,152 @@ var _ interface {
 	ErrorName() string
 } = ExperimentValidationError{}
 
+// Validate checks the field values on ExperimentModel with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *ExperimentModel) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Id
+
+	if v, ok := interface{}(m.GetTestConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExperimentModelValidationError{
+				field:  "TestConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// ExperimentModelValidationError is the validation error returned by
+// ExperimentModel.Validate if the designated constraints aren't met.
+type ExperimentModelValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExperimentModelValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExperimentModelValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExperimentModelValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExperimentModelValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExperimentModelValidationError) ErrorName() string { return "ExperimentModelValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ExperimentModelValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExperimentModel.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExperimentModelValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExperimentModelValidationError{}
+
+// Validate checks the field values on ExperimentViewModel with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *ExperimentViewModel) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Cluster
+
+	return nil
+}
+
+// ExperimentViewModelValidationError is the validation error returned by
+// ExperimentViewModel.Validate if the designated constraints aren't met.
+type ExperimentViewModelValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExperimentViewModelValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExperimentViewModelValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExperimentViewModelValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExperimentViewModelValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExperimentViewModelValidationError) ErrorName() string {
+	return "ExperimentViewModelValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExperimentViewModelValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExperimentViewModel.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExperimentViewModelValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExperimentViewModelValidationError{}
+
 // Validate checks the field values on CreateExperimentsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.

@@ -5,12 +5,16 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	//"github.com/golang/protobuf/proto"
+	//"github.com/golang/protobuf/ptypes"
+	//serverexperimentationv1 "github.com/lyft/clutch/backend/api/chaos/serverexperimentation/v1"
+	//"reflect"
 	"strings"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/ptypes/any"
-	structpb "github.com/golang/protobuf/ptypes/struct"
+	//structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/uber-go/tally"
 	"go.uber.org/zap"
 
@@ -135,12 +139,30 @@ func (fs *experimentStore) GetExperiments(ctx context.Context) ([]*experimentati
 			return nil, err
 		}
 
-		anyConfig := &structpb.Struct{}
+		anyConfig := &any.Any{}
 		if nil != jsonpb.Unmarshal(strings.NewReader(details), anyConfig) {
 			return nil, err
 		}
 
-		// typedConfig := &serverexperimentation.ServerTestSpecification{}
+		//t := &serverexperimentationv1.ServerTestSpecification{}
+		//any, err := ptypes.MarshalAny(t)
+
+		//marshaler := jsonpb.Marshaler{}
+		//buf := &bytes/**/.Buffer{}
+		//err := marshaler.Marshal(buf, t)
+
+		//message := t.ProtoMessage
+		//print(message)
+		//print(err)
+		//print(any)
+
+
+		//xt := reflect.TypeOf(t).Kind()
+		//xtString := xt.String()
+		//
+		//print(xtString)
+		//print(xt.String())
+
 		// jsonpb.Unmarshal(anyConfig, &typedConfig)
 		experiment.TestConfig = anyConfig
 

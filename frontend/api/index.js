@@ -5395,7 +5395,7 @@ export const clutch = $root.clutch = (() => {
                      * @memberof clutch.chaos.experimentation.v1
                      * @interface IExperiment
                      * @property {number|Long|null} [id] Experiment id
-                     * @property {google.protobuf.IStruct|null} [testConfig] Experiment testConfig
+                     * @property {google.protobuf.IAny|null} [testConfig] Experiment testConfig
                      */
 
                     /**
@@ -5423,7 +5423,7 @@ export const clutch = $root.clutch = (() => {
 
                     /**
                      * Experiment testConfig.
-                     * @member {google.protobuf.IStruct|null|undefined} testConfig
+                     * @member {google.protobuf.IAny|null|undefined} testConfig
                      * @memberof clutch.chaos.experimentation.v1.Experiment
                      * @instance
                      */
@@ -5444,7 +5444,7 @@ export const clutch = $root.clutch = (() => {
                             if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
                                 return "id: integer|Long expected";
                         if (message.testConfig != null && message.hasOwnProperty("testConfig")) {
-                            let error = $root.google.protobuf.Struct.verify(message.testConfig);
+                            let error = $root.google.protobuf.Any.verify(message.testConfig);
                             if (error)
                                 return "testConfig." + error;
                         }
@@ -5475,7 +5475,7 @@ export const clutch = $root.clutch = (() => {
                         if (object.testConfig != null) {
                             if (typeof object.testConfig !== "object")
                                 throw TypeError(".clutch.chaos.experimentation.v1.Experiment.testConfig: object expected");
-                            message.testConfig = $root.google.protobuf.Struct.fromObject(object.testConfig);
+                            message.testConfig = $root.google.protobuf.Any.fromObject(object.testConfig);
                         }
                         return message;
                     };
@@ -5507,7 +5507,7 @@ export const clutch = $root.clutch = (() => {
                             else
                                 object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
                         if (message.testConfig != null && message.hasOwnProperty("testConfig"))
-                            object.testConfig = $root.google.protobuf.Struct.toObject(message.testConfig, options);
+                            object.testConfig = $root.google.protobuf.Any.toObject(message.testConfig, options);
                         return object;
                     };
 
@@ -5523,6 +5523,243 @@ export const clutch = $root.clutch = (() => {
                     };
 
                     return Experiment;
+                })();
+
+                v1.ExperimentModel = (function() {
+
+                    /**
+                     * Properties of an ExperimentModel.
+                     * @memberof clutch.chaos.experimentation.v1
+                     * @interface IExperimentModel
+                     * @property {number|Long|null} [id] ExperimentModel id
+                     * @property {google.protobuf.IAny|null} [testConfig] ExperimentModel testConfig
+                     */
+
+                    /**
+                     * Constructs a new ExperimentModel.
+                     * @memberof clutch.chaos.experimentation.v1
+                     * @classdesc Represents an ExperimentModel.
+                     * @implements IExperimentModel
+                     * @constructor
+                     * @param {clutch.chaos.experimentation.v1.IExperimentModel=} [properties] Properties to set
+                     */
+                    function ExperimentModel(properties) {
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * ExperimentModel id.
+                     * @member {number|Long} id
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentModel
+                     * @instance
+                     */
+                    ExperimentModel.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+                    /**
+                     * ExperimentModel testConfig.
+                     * @member {google.protobuf.IAny|null|undefined} testConfig
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentModel
+                     * @instance
+                     */
+                    ExperimentModel.prototype.testConfig = null;
+
+                    /**
+                     * Verifies an ExperimentModel message.
+                     * @function verify
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentModel
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentModel.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
+                                return "id: integer|Long expected";
+                        if (message.testConfig != null && message.hasOwnProperty("testConfig")) {
+                            let error = $root.google.protobuf.Any.verify(message.testConfig);
+                            if (error)
+                                return "testConfig." + error;
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates an ExperimentModel message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentModel
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {clutch.chaos.experimentation.v1.ExperimentModel} ExperimentModel
+                     */
+                    ExperimentModel.fromObject = function fromObject(object) {
+                        if (object instanceof $root.clutch.chaos.experimentation.v1.ExperimentModel)
+                            return object;
+                        let message = new $root.clutch.chaos.experimentation.v1.ExperimentModel();
+                        if (object.id != null)
+                            if ($util.Long)
+                                (message.id = $util.Long.fromValue(object.id)).unsigned = false;
+                            else if (typeof object.id === "string")
+                                message.id = parseInt(object.id, 10);
+                            else if (typeof object.id === "number")
+                                message.id = object.id;
+                            else if (typeof object.id === "object")
+                                message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
+                        if (object.testConfig != null) {
+                            if (typeof object.testConfig !== "object")
+                                throw TypeError(".clutch.chaos.experimentation.v1.ExperimentModel.testConfig: object expected");
+                            message.testConfig = $root.google.protobuf.Any.fromObject(object.testConfig);
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from an ExperimentModel message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentModel
+                     * @static
+                     * @param {clutch.chaos.experimentation.v1.ExperimentModel} message ExperimentModel
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentModel.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        let object = {};
+                        if (options.defaults) {
+                            if ($util.Long) {
+                                let long = new $util.Long(0, 0, false);
+                                object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.id = options.longs === String ? "0" : 0;
+                            object.testConfig = null;
+                        }
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (typeof message.id === "number")
+                                object.id = options.longs === String ? String(message.id) : message.id;
+                            else
+                                object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
+                        if (message.testConfig != null && message.hasOwnProperty("testConfig"))
+                            object.testConfig = $root.google.protobuf.Any.toObject(message.testConfig, options);
+                        return object;
+                    };
+
+                    /**
+                     * Converts this ExperimentModel to JSON.
+                     * @function toJSON
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentModel
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentModel.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return ExperimentModel;
+                })();
+
+                v1.ExperimentViewModel = (function() {
+
+                    /**
+                     * Properties of an ExperimentViewModel.
+                     * @memberof clutch.chaos.experimentation.v1
+                     * @interface IExperimentViewModel
+                     * @property {string|null} [cluster] ExperimentViewModel cluster
+                     */
+
+                    /**
+                     * Constructs a new ExperimentViewModel.
+                     * @memberof clutch.chaos.experimentation.v1
+                     * @classdesc Represents an ExperimentViewModel.
+                     * @implements IExperimentViewModel
+                     * @constructor
+                     * @param {clutch.chaos.experimentation.v1.IExperimentViewModel=} [properties] Properties to set
+                     */
+                    function ExperimentViewModel(properties) {
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * ExperimentViewModel cluster.
+                     * @member {string} cluster
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @instance
+                     */
+                    ExperimentViewModel.prototype.cluster = "";
+
+                    /**
+                     * Verifies an ExperimentViewModel message.
+                     * @function verify
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentViewModel.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.cluster != null && message.hasOwnProperty("cluster"))
+                            if (!$util.isString(message.cluster))
+                                return "cluster: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates an ExperimentViewModel message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {clutch.chaos.experimentation.v1.ExperimentViewModel} ExperimentViewModel
+                     */
+                    ExperimentViewModel.fromObject = function fromObject(object) {
+                        if (object instanceof $root.clutch.chaos.experimentation.v1.ExperimentViewModel)
+                            return object;
+                        let message = new $root.clutch.chaos.experimentation.v1.ExperimentViewModel();
+                        if (object.cluster != null)
+                            message.cluster = String(object.cluster);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from an ExperimentViewModel message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @static
+                     * @param {clutch.chaos.experimentation.v1.ExperimentViewModel} message ExperimentViewModel
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentViewModel.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        let object = {};
+                        if (options.defaults)
+                            object.cluster = "";
+                        if (message.cluster != null && message.hasOwnProperty("cluster"))
+                            object.cluster = message.cluster;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this ExperimentViewModel to JSON.
+                     * @function toJSON
+                     * @memberof clutch.chaos.experimentation.v1.ExperimentViewModel
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentViewModel.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    return ExperimentViewModel;
                 })();
 
                 v1.CreateExperimentsRequest = (function() {

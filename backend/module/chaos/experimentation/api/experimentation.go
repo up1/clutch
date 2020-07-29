@@ -6,6 +6,9 @@ package api
 
 import (
 	"errors"
+	"github.com/golang/protobuf/proto"
+	serverexperimentationv1 "github.com/lyft/clutch/backend/api/chaos/serverexperimentation/v1"
+	"reflect"
 
 	"github.com/golang/protobuf/ptypes/any"
 	"github.com/uber-go/tally"
@@ -25,10 +28,22 @@ const (
 // Service contains all dependencies for the API service.
 type Service struct {
 	experimentStore       experimentstore.ExperimentStore
+	converterRegistry     *ConverterRegistry
 	logger                *zap.SugaredLogger
 	createExperimentsStat tally.Counter
 	getExperimentsStat    tally.Counter
 	deleteExperimentsStat tally.Counter
+}
+
+type ConverterRegistry struct {
+	services     map[reflect.Type]Service // map of types to services.
+	serviceTypes []reflect.Type           // keep an ordered slice of registered service types.
+}
+
+func NewServiceRegistry() *ConverterRegistry {
+	return &ConverterRegistry{
+		services: make(map[reflect.Type]Service),
+	}
 }
 
 // New instantiates a Service object.
@@ -46,6 +61,7 @@ func New(_ *any.Any, logger *zap.Logger, scope tally.Scope) (module.Module, erro
 	apiScope := scope.SubScope("experimentation")
 	return &Service{
 		experimentStore:       experimentStore,
+		converterRegistry:     NewServiceRegistry(),
 		logger:                logger.Sugar(),
 		createExperimentsStat: apiScope.Counter("create_experiments"),
 		getExperimentsStat:    apiScope.Counter("get_experiments"),
@@ -55,6 +71,8 @@ func New(_ *any.Any, logger *zap.Logger, scope tally.Scope) (module.Module, erro
 
 func (s *Service) Register(r module.Registrar) error {
 	experimentation.RegisterExperimentsAPIServer(r.GRPCServer(), s)
+	proto.RegisterType((*serverexperimentationv1.ServerTestSpecification)(nil),
+		"clutch.chaos.serverexperimentation.v1.ServerTestSpecification")
 	return r.RegisterJSONGateway(experimentation.RegisterExperimentsAPIHandler)
 }
 

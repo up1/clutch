@@ -2323,7 +2323,7 @@ export namespace clutch {
                     id?: (number|Long|null);
 
                     /** Experiment testConfig */
-                    testConfig?: (google.protobuf.IStruct|null);
+                    testConfig?: (google.protobuf.IAny|null);
                 }
 
                 /** Represents an Experiment. */
@@ -2339,7 +2339,7 @@ export namespace clutch {
                     public id: (number|Long);
 
                     /** Experiment testConfig. */
-                    public testConfig?: (google.protobuf.IStruct|null);
+                    public testConfig?: (google.protobuf.IAny|null);
 
                     /**
                      * Verifies an Experiment message.
@@ -2365,6 +2365,108 @@ export namespace clutch {
 
                     /**
                      * Converts this Experiment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExperimentModel. */
+                interface IExperimentModel {
+
+                    /** ExperimentModel id */
+                    id?: (number|Long|null);
+
+                    /** ExperimentModel testConfig */
+                    testConfig?: (google.protobuf.IAny|null);
+                }
+
+                /** Represents an ExperimentModel. */
+                class ExperimentModel implements IExperimentModel {
+
+                    /**
+                     * Constructs a new ExperimentModel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: clutch.chaos.experimentation.v1.IExperimentModel);
+
+                    /** ExperimentModel id. */
+                    public id: (number|Long);
+
+                    /** ExperimentModel testConfig. */
+                    public testConfig?: (google.protobuf.IAny|null);
+
+                    /**
+                     * Verifies an ExperimentModel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentModel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentModel
+                     */
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.ExperimentModel;
+
+                    /**
+                     * Creates a plain object from an ExperimentModel message. Also converts values to other types if specified.
+                     * @param message ExperimentModel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: clutch.chaos.experimentation.v1.ExperimentModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentModel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExperimentViewModel. */
+                interface IExperimentViewModel {
+
+                    /** ExperimentViewModel cluster */
+                    cluster?: (string|null);
+                }
+
+                /** Represents an ExperimentViewModel. */
+                class ExperimentViewModel implements IExperimentViewModel {
+
+                    /**
+                     * Constructs a new ExperimentViewModel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: clutch.chaos.experimentation.v1.IExperimentViewModel);
+
+                    /** ExperimentViewModel cluster. */
+                    public cluster: string;
+
+                    /**
+                     * Verifies an ExperimentViewModel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentViewModel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentViewModel
+                     */
+                    public static fromObject(object: { [k: string]: any }): clutch.chaos.experimentation.v1.ExperimentViewModel;
+
+                    /**
+                     * Creates a plain object from an ExperimentViewModel message. Also converts values to other types if specified.
+                     * @param message ExperimentViewModel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: clutch.chaos.experimentation.v1.ExperimentViewModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentViewModel to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

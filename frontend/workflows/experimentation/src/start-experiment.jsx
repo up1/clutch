@@ -183,6 +183,7 @@ export const StartLatencyExperiment = ({ heading }) => {
           experiments: [
             {
               testConfig: {
+                "@type": "type.googleapis.com/clutch.chaos.serverexperimentation.v1.ServerTestSpecification",
                 latency: {
                   clusterPair: {
                     downstreamCluster: clusterPairTargetData.downstreamCluster,
